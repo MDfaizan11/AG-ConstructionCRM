@@ -46,7 +46,7 @@ function Contractor() {
               onClick={() => handleclick(item.id)}
               className="show_building_name_material"
             >
-              <BsFillBuildingsFill size={80} color="rgb(6, 151, 177)" />
+              <BsFillBuildingsFill size={80} color="rgb(224 45 45);" />
               <p>
                 <b>{item.name}</b>
               </p>

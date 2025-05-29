@@ -33,6 +33,7 @@ import ContractorDetail from "./pages/contractor/ContractorDetail";
 import SingleVendor from "./pages/material/SingleVendor";
 import EmployeeForm from "./Registration/EmployeeForm";
 import Notification from "./pages/Notification/Notification";
+import StockDetails from "./pages/material/StockDetails";
 function App() {
   return (
     <BrowserRouter>
@@ -81,6 +82,7 @@ function App() {
             />
             <Route path="/employeregistration" element={<EmployeeForm />} />
             <Route element={<Notification />} path="/notification" />
+            <Route element={<StockDetails />} path="/StockDetails/:id/:name" />
           </Route>
         </Route>
       </Routes>

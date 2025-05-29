@@ -36,7 +36,7 @@ function Material() {
       <h2
         style={{ textAlign: "center", marginTop: "35px", marginBottom: "35px" }}
       >
-        Material management
+        Stock management
       </h2>
 
       <div className="show_building_name_material_wrapper">
@@ -47,7 +47,7 @@ function Material() {
               onClick={() => handleclick(item.id)}
               className="show_building_name_material"
             >
-              <BsFillBuildingsFill size={80} color="rgb(6, 151, 177)" />
+              <BsFillBuildingsFill size={80} color="rgb(222 42 42)" />
               <p>
                 <b>{item.name}</b>
               </p>

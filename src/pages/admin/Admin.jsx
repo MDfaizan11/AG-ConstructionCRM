@@ -301,7 +301,7 @@ function Admin() {
     { icon: FaLandmark, label: "Land Management", path: "/landpurchase" },
     { icon: FaBuilding, label: "Flat Management", path: "/flat" },
     { icon: FaUsers, label: "Customer Details", path: "/clist" },
-    { icon: FaBoxes, label: "Material Management", path: "/material" },
+    { icon: FaBoxes, label: "Stock Management", path: "/material" },
     { icon: FaBoxes, label: "Contractor", path: "/contractor" },
     { icon: FaUserFriends, label: "Add Staff", path: "/employee" },
     { icon: RiFilePaper2Fill, label: "Letter", path: "/letter" },

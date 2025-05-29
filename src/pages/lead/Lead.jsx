@@ -302,10 +302,10 @@ function Lead() {
                       <tr>
                         <th>First Name</th>
                         <th>Date</th>
-                        <th>Job Title</th>
+                        {/* <th>Job Title</th> */}
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Company</th>
+                        {/* <th>Company</th> */}
                         <th>Status</th>
                         <th>Action</th>
                         <th>View</th>
@@ -320,10 +320,10 @@ function Lead() {
                           <td data-label="Date">
                             {new Date(lead.foundOn).toLocaleDateString("en-GB")}
                           </td>
-                          <td data-label="Job Title">{lead.jobTitle}</td>
+                          {/* <td data-label="Job Title">{lead.jobTitle}</td> */}
                           <td data-label="Email">{lead.email}</td>
                           <td data-label="Phone">{lead.phoneNumber}</td>
-                          <td data-label="Company">{lead.companyName}</td>
+                          {/* <td data-label="Company">{lead.companyName}</td> */}
                           <td data-label="Status">{lead.status}</td>
                           <td data-label="Action">
                             <button

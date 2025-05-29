@@ -8,7 +8,6 @@
   width: 100%;
   padding: 20px;
   text-align: center;
-  background-color: #ffffff;
 }
 
 .Add_flat_main_wrapper h1 {
@@ -38,7 +37,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .flatcontainer {
@@ -1443,17 +1442,30 @@
 /* ---- */
 .scheme_search_add_section {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   margin-top: 50px;
+  flex-wrap: wrap;
 }
 .scheme_search_container input {
-  width: 350px;
+  width: 450px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 10px;
   font-size: 16px;
+  outline: none;
 }
 
+@media screen and (max-width: 480px) {
+  .scheme_search_container input {
+    width: 100%;
+  }
+
+  .scheme_search_add_section {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+}
 /* ***************** */

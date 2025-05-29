@@ -27,9 +27,7 @@ function Notification() {
     localStorage.getItem("employeROyalmadeLogin") || "{}"
   )?.token;
 
-  // Function to parse alert messages from API
   const parseAlertMessage = (message, index) => {
-    // Handle the specific format: ⚠️ Alert: Lead 'Name' has status 'STATUS' on DATE. Remark: remark
     const alertPattern =
       /⚠️ Alert: Lead '([^']+)' has status '([^']+)' on ([^.]+)\. Remark: (.+)/;
     const match = message.match(alertPattern);
@@ -135,7 +133,7 @@ function Notification() {
             "Content-Type": "application/json",
           },
         });
-
+        console.log(response.data);
         const rawMessages = response.data; // This is your array of strings
 
         const parsedNotifications = rawMessages.map((message, index) =>

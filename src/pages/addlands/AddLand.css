@@ -132,7 +132,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
-  background-color: #61b6ad;
+  background-color: #eb3d3d;
   height: 50px;
   width: 110px;
   border-radius: 10px;
@@ -167,7 +167,7 @@ button {
 }
 
 .land_show_table th {
-  background-color: rgba(42, 157, 144, 0.741);
+  background-color: #d65b3c;
   color: white;
 }
 

@@ -392,8 +392,10 @@ function LandPurchase() {
                   <th colSpan={1}>Token Amount</th>
                   <th colSpan={1}>Agreement Amount</th>
                   <th colSpan={1}>Remaining Amount</th>
-                  <th> Add Patner</th>
+                  <th colSpan={1}> Add Patner</th>
+                  <th colSpan={1}>Action</th>
                   <th colSpan={2}>Action</th>
+
                   {/* <th colSpan={1}>Partners Payment</th> */}
                 </tr>
               </thead>
