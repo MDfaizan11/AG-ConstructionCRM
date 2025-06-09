@@ -194,27 +194,35 @@ function StockDetails() {
           <table className="usedStockDetailTable">
             <thead>
               <tr>
-                <th>Sr no</th>
+                <th>Sr No</th>
                 <th>Quantity Used</th>
-                <th>Date Used </th>
+                <th>Date Used</th>
               </tr>
             </thead>
             <tbody>
-              {HistoryUsedStock.map((item, index) => {
-                const dateObj = new Date(item.usedAt);
-                const day = String(dateObj.getDate()).padStart(2, "0");
-                const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-                const year = dateObj.getFullYear();
-                const formattedDate = `${day}-${month}-${year}`;
+              {HistoryUsedStock.length > 0 ? (
+                HistoryUsedStock.map((item, index) => {
+                  const dateObj = new Date(item.usedAt);
+                  const day = String(dateObj.getDate()).padStart(2, "0");
+                  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+                  const year = dateObj.getFullYear();
+                  const formattedDate = `${day}-${month}-${year}`;
 
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.quantityUsed}</td>
-                    <td>{formattedDate}</td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.quantityUsed}</td>
+                      <td>{formattedDate}</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="3" style={{ textAlign: "center" }}>
+                    No history found
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

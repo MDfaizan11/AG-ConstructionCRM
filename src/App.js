@@ -34,6 +34,8 @@ import SingleVendor from "./pages/material/SingleVendor";
 import EmployeeForm from "./Registration/EmployeeForm";
 import Notification from "./pages/Notification/Notification";
 import StockDetails from "./pages/material/StockDetails";
+import Structure from "./pages/structure/Structure";
+import StructureDetail from "./pages/structure/StructureDetail";
 function App() {
   return (
     <BrowserRouter>
@@ -83,6 +85,11 @@ function App() {
             <Route path="/employeregistration" element={<EmployeeForm />} />
             <Route element={<Notification />} path="/notification" />
             <Route element={<StockDetails />} path="/StockDetails/:id/:name" />
+            <Route element={<Structure />} path="/structure" />
+            <Route
+              element={<StructureDetail />}
+              path="/structureDetail/:id/:name"
+            />
           </Route>
         </Route>
       </Routes>

@@ -28,7 +28,6 @@ function Material() {
   }, []);
 
   function handleclick(id) {
-    console.log(id);
     navigate(`/addmaterial/${id}`);
   }
   return (
