@@ -1983,17 +1983,9 @@ function Flatowner() {
   };
 
   async function handleDeleteInstallment(id) {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to delete this installment?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ef4444",
-      cancelButtonColor: "#6b7280",
-      confirmButtonText: "Yes, delete it!",
-    });
+    const result = window.confirm("Are you sure To Delete ?");
 
-    if (result.isConfirmed) {
+    if (result) {
       try {
         await axios.delete(`${BASE_URL}/deleteBookingInstallment/${id}`, {
           headers: {

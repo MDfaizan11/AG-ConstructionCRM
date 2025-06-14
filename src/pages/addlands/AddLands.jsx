@@ -4,7 +4,7 @@ import axios from "axios";
 import { BASE_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 function AddLand() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [ownerName, setOwnerName] = useState("");
   const [ownerPhone, setOwnerPhone] = useState("");
   const [ownerEmail, setOwnerEmail] = useState("");
@@ -22,17 +22,19 @@ function AddLand() {
   const [pincode, setPincode] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
-  const [khNumber, setkhNumber] = useState("")
-  const [PhNumber, setPhNumber] = useState("")
-  const [plotNumber, setPlotNumber] = useState("")
-  const [mauzaNumber, setMauzaNumber] = useState("")
-  const [date, setDate] = useState("")
+  const [khNumber, setkhNumber] = useState("");
+  const [PhNumber, setPhNumber] = useState("");
+  const [plotNumber, setPlotNumber] = useState("");
+  const [mauzaNumber, setMauzaNumber] = useState("");
+  const [date, setDate] = useState("");
   const [partners, setPartners] = useState([]);
-
 
   function handleAddPartner(e) {
     e.preventDefault();
-    setPartners([...partners, { name: "", email: "", phoneNumber: "", amount: "" }]);
+    setPartners([
+      ...partners,
+      { name: "", email: "", phoneNumber: "", amount: "" },
+    ]);
   }
 
   // Handle Change for Partner Fields
@@ -52,7 +54,7 @@ function AddLand() {
   // Handle Submit
   const token = JSON.parse(localStorage.getItem("employeROyalmadeLogin")) || [];
   const myToken = token.token;
-  console.log(myToken)
+  console.log(myToken);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +74,7 @@ function AddLand() {
         muza: mauzaNumber,
         khno: khNumber,
         phno: PhNumber,
-        plotno: plotNumber
+        plotno: plotNumber,
       },
       owner: {
         name: ownerName,
@@ -86,13 +88,15 @@ function AddLand() {
         address: purchaserEmail,
         aadharNumber: purchaserAadhar,
       },
-      partners: partners.map(partner => ({
+      partners: partners.map((partner) => ({
         ...partner,
-        amount: partner.amount.replace(/,/g, "") // Ensure partner amount is also formatted
-      }))
+        amount: partner.amount.replace(/,/g, ""), // Ensure partner amount is also formatted
+      })),
     };
 
-    const token = JSON.parse(localStorage.getItem("employeROyalmadeLogin"))?.token;
+    const token = JSON.parse(
+      localStorage.getItem("employeROyalmadeLogin")
+    )?.token;
 
     if (!token) {
       console.error("Token is missing");
@@ -106,31 +110,32 @@ function AddLand() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
-      alert("Your Land is Successfully Added");
-      navigate("/landpurchase")
-      setOwnerName("");
-      setOwnerPhone("");
-      setOwnerEmail("");
-      setOwnerAadhar("");
-      setPurchaserName("");
-      setPurchaserPhone("");
-      setPurchaserEmail("");
-      setPurchaserAadhar("");
-      setArea("");
-      setTokenAmount("");
-      setAgreementAmount("");
-      setTotalAmount("");
-      setCity("");
-      setLandmark("");
-      setPincode("");
-      setCountry("");
-      setState("");
-      setkhNumber("");
-      setPhNumber("");
-      setPlotNumber("");
-      setMauzaNumber("");
-      setPartners([]);
+      if (response.status === 200) {
+        alert("Your Land is Successfully Added");
+        navigate("/landpurchase");
+        setOwnerName("");
+        setOwnerPhone("");
+        setOwnerEmail("");
+        setOwnerAadhar("");
+        setPurchaserName("");
+        setPurchaserPhone("");
+        setPurchaserEmail("");
+        setPurchaserAadhar("");
+        setArea("");
+        setTokenAmount("");
+        setAgreementAmount("");
+        setTotalAmount("");
+        setCity("");
+        setLandmark("");
+        setPincode("");
+        setCountry("");
+        setState("");
+        setkhNumber("");
+        setPhNumber("");
+        setPlotNumber("");
+        setMauzaNumber("");
+        setPartners([]);
+      }
     } catch (error) {
       console.error("Error submitting form:", error.response?.data || error);
     }
@@ -266,7 +271,6 @@ function AddLand() {
             />
           </div>
 
-
           {/* Address Details */}
           <h3>Address Details</h3>
           <div className="Add_land_form_group">
@@ -282,7 +286,7 @@ function AddLand() {
             <label>Mauza:</label>
             <input
               type="text"
-              placeholder="Enter city"
+              placeholder="Enter Mauza"
               value={mauzaNumber}
               onChange={(e) => setMauzaNumber(e.target.value)}
             />
@@ -309,9 +313,9 @@ function AddLand() {
             <label>Plot No:</label>
             <input
               type="text"
-              placeholder="Enter city"
+              placeholder="Enter PLot No"
               value={plotNumber}
-              onChange={(e => setPlotNumber(e.target.value))}
+              onChange={(e) => setPlotNumber(e.target.value)}
             />
           </div>
           <div className="Add_land_form_group">
@@ -353,10 +357,18 @@ function AddLand() {
 
           {/* Partner Details */}
           <h3>Partner Details</h3>
-          <button onClick={handleAddPartner} className="add_partner_btn">Add Partner</button>
+          <button onClick={handleAddPartner} className="add_partner_btn">
+            Add Partner
+          </button>
           {partners.map((partner, index) => (
             <div key={index} className="Addland_partner_section">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <h4>Partner {index + 1}</h4>
                 <button
                   type="button"
@@ -397,10 +409,13 @@ function AddLand() {
               </div>
               <div className="Add_land_form_group">
                 <label>Phone:</label>
-                <input type="number"
+                <input
+                  type="number"
                   placeholder="Enter Number"
                   value={partner.phoneNumber}
-                  onChange={(e) => handlePartnerChange(index, "phoneNumber", e.target.value)}
+                  onChange={(e) =>
+                    handlePartnerChange(index, "phoneNumber", e.target.value)
+                  }
                 />
               </div>
 
@@ -409,7 +424,10 @@ function AddLand() {
                 <input
                   type="date"
                   placeholder="Enter amount"
-                  value={partner.paymentDate || new Date().toISOString().split("T")[0]}
+                  value={
+                    partner.paymentDate ||
+                    new Date().toISOString().split("T")[0]
+                  }
                   onChange={(e) =>
                     handlePartnerChange(index, "paymentDate", e.target.value)
                   }
