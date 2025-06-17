@@ -356,10 +356,10 @@ function AddLand() {
           </div>
 
           {/* Partner Details */}
-          <h3>Partner Details</h3>
+          {/* <h3>Partner Details</h3>
           <button onClick={handleAddPartner} className="add_partner_btn">
             Add Partner
-          </button>
+          </button> */}
           {partners.map((partner, index) => (
             <div key={index} className="Addland_partner_section">
               <div
@@ -397,10 +397,10 @@ function AddLand() {
                 />
               </div>
               <div className="Add_land_form_group">
-                <label>Address:</label>
+                <label>Enter City:</label>
                 <input
                   type="text"
-                  placeholder="Enter Address"
+                  placeholder="Enter city"
                   value={partner.city}
                   onChange={(e) =>
                     handlePartnerChange(index, "city", e.target.value)
@@ -419,7 +419,7 @@ function AddLand() {
                 />
               </div>
 
-              <div className="Add_land_form_group">
+              {/* <div className="Add_land_form_group">
                 <label>Date:</label>
                 <input
                   type="date"
@@ -432,7 +432,7 @@ function AddLand() {
                     handlePartnerChange(index, "paymentDate", e.target.value)
                   }
                 />
-              </div>
+              </div> */}
             </div>
           ))}
 
