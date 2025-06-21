@@ -87,7 +87,7 @@ function LandPurchase() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
+
       alert("Data deleted");
       setrefreshkey(refreshKey + 1);
       setGetLand((prevLands) => prevLands.filter((land) => land.id !== id));
@@ -112,7 +112,7 @@ function LandPurchase() {
           "Content-Type": "application/json",
         },
       });
-      console.log(resonse.data);
+
       setShowCard(resonse.data);
     } catch (error) {
       console.log(error);
@@ -161,7 +161,7 @@ function LandPurchase() {
           },
         }
       );
-      console.log(response);
+
       setrefreshkey(refreshKey + 1);
       alert("Partner payment added");
       setStateName("");
@@ -193,7 +193,7 @@ function LandPurchase() {
           },
         }
       );
-      console.log(response.data);
+
       setpatnerData(response.data);
     } catch (error) {
       console.log(error);
@@ -232,7 +232,7 @@ function LandPurchase() {
           },
         }
       );
-      console.log(response.data);
+
       if (response.status === 201) {
         alert("patner payment add successfully");
         setpatnerPaymentForm(false);
@@ -270,7 +270,7 @@ function LandPurchase() {
           },
         }
       );
-      console.log(response.data);
+
       if (response.status === 200) {
         alert("patner add successfully");
         setrefreshkey(refreshKey + 1);

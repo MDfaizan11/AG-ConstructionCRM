@@ -345,10 +345,9 @@
 .responsive-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 30px;
   overflow-x: auto;
   display: block;
-  /* padding: 10px; */
 }
 
 .responsive-table th,

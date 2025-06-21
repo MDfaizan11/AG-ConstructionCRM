@@ -16,6 +16,7 @@ function Material() {
         const response = await axios.get(`${BASE_URL}/getAllProjects`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         });
         console.log(response);
