@@ -18,8 +18,8 @@ function LatterHead() {
   function handleDownlodeInfra() {
     const element = letterref.current;
     const options = {
-      margin: 0.5,
-      filename: "Letter_Head_infra.pdf",
+      margin: 0.1,
+      filename: "Letter_Head.pdf",
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
@@ -92,11 +92,12 @@ function LatterHead() {
                   color: "#000",
                   marginLeft: "50px",
                   marginTop: "20px",
+                  alignItems: "center",
                 }}
               >
                 <img
                   style={{
-                    height: "80px",
+                    height: "100px",
                     width: "auto",
                     objectFit: "contain",
                   }}
@@ -108,8 +109,8 @@ function LatterHead() {
                   <div className="relieving_detail_row">
                     <div className="relieving_detail_text">
                       <p>
-                        62, Near Rakshak Fresh Mart, Ingole Nagar, Hudkeshwar
-                        Road, Nagpur-34
+                        Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
+                        Nagar, Nagpur, Maharashtra 440034
                       </p>
                     </div>
                     <div className="relieving_icon_box">
@@ -118,7 +119,7 @@ function LatterHead() {
                   </div>
                   <div className="relieving_detail_row">
                     <p className="relieving_detail_text">
-                      royaalmede@gmail.com
+                      agconstructions220@gmail.com
                     </p>
                     <div className="relieving_icon_box">
                       <FaEnvelope size={15} color="#fff" />
@@ -126,16 +127,14 @@ function LatterHead() {
                   </div>
                   <div className="relieving_detail_row">
                     <p className="relieving_detail_text">
-                      www.royaalmede.co.in
+                      www.agconstructionnagpur.in
                     </p>
                     <div className="relieving_icon_box">
                       <FaGlobe size={15} color="#fff" />
                     </div>
                   </div>
                   <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">
-                    86691 55981
-                    </p>
+                    <p className="relieving_detail_text">+91 7620419075</p>
                     <div className="relieving_icon_box">
                       <FaPhoneAlt size={15} color="#fff" />
                     </div>

@@ -35,7 +35,7 @@ function Addmeterial() {
             "Content-Type": "application/json",
           },
         });
-        console.log(response.data);
+
         setStockData(response.data);
       } catch (error) {
         console.log(error);
@@ -65,7 +65,7 @@ function Addmeterial() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+
       if (response.status === 200) {
         alert("Stock Added Successfully");
         setrefreshkey(refreshKey + 1);
@@ -112,7 +112,7 @@ function Addmeterial() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+
       seteditStockDate(response.data?.productAddOnDate);
       seteditStockPrice(response.data?.price);
       seteditStockRemainingQuantity(response.data?.remainingQuantity);
