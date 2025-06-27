@@ -385,7 +385,7 @@ function LandPurchase() {
               <thead className="land_show_table_thead">
                 <tr className="land_show_table_tr">
                   <th colSpan={1}>Owner Details</th>
-                  <th colSpan={1}>Royaalmede</th>
+                  <th colSpan={1}>AG-Construction</th>
                   <th colSpan={1}>Partners</th>
                   <th colSpan={1}>Address Details</th>
                   <th colSpan={1}>Total Amount</th>
