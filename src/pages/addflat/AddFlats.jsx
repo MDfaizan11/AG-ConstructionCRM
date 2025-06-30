@@ -7,7 +7,7 @@ import { BsFillBuildingsFill } from "react-icons/bs";
 import { AiFillCheckCircle, AiOutlineClockCircle } from "react-icons/ai";
 import { FaTrashAlt, FaPlus, FaSearch } from "react-icons/fa";
 import { MdApartment, MdSquareFoot, MdLocationCity } from "react-icons/md";
-
+import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { BASE_URL } from "../../config";
 
@@ -26,6 +26,7 @@ function Flat() {
   const [totalFlat, setTotalFlat] = useState("");
   const [buildingSize, setBuildingSize] = useState("");
   const [searchScheme, setSearchScheme] = useState("");
+  const [editSchemeId, setEditSchemeId] = useState(null);
 
   function handlescheme(e) {
     e.preventDefault();
@@ -83,12 +84,11 @@ function Flat() {
           },
         });
         console.log("API response.data:", response.data);
-        // Ensure response.data is an array before setting
         const data = Array.isArray(response.data) ? response.data : [];
         setMyLand(data);
       } catch (error) {
         console.log("Error fetching projects:", error);
-        setMyLand([]); // Set to empty array on error
+        setMyLand([]);
       }
     }
     getLand();
@@ -184,6 +184,71 @@ function Flat() {
     }
   };
 
+  async function HandleUpdateScheme(id) {
+    setEditSchemeId(id);
+    try {
+      const response = await axios.get(`${BASE_URL}/getProjectById/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      if (response.data) {
+        setSchemeName(response.data.name);
+        setSelectStatus(response.data.status);
+        setTotalFlat(response.data.totalflat);
+        setBuildingSize(response.data.buildingSize);
+        setAddScheme(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleUpdateExistingScheme(e) {
+    e.preventDefault();
+    const obj = {
+      name: Schemename,
+      status: selectStatus,
+      totalflat: totalFlat,
+      buildingSize,
+    };
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/updateProject/${editSchemeId}`,
+        obj,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response);
+      Swal.fire({
+        title: "Success!",
+        text: "Scheme updated successfully",
+        icon: "success",
+        confirmButtonColor: "#00d4aa",
+      });
+      setAddScheme(false);
+      setSchemeName("");
+      setSelectStatus("");
+      setTotalFlat("");
+      setBuildingSize("");
+      setEditSchemeId(null);
+      setCount((prevCount) => prevCount + 1);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to update scheme",
+        icon: "error",
+        confirmButtonColor: "#ff6b6b",
+      });
+    }
+  }
   return (
     <div className="addflat-main-wrapper">
       {/* Navigation Bar */}
@@ -271,6 +336,18 @@ function Flat() {
                       title="Delete Scheme"
                     >
                       <FaTrashAlt />
+                    </button>
+                    <button
+                      className="addflat-delete-button"
+                      onClick={() => HandleUpdateScheme(item.id)}
+                      title="Delete Scheme"
+                      style={{
+                        backgroundColor: "lightblue",
+                        color: "black",
+                        marginLeft: "5px",
+                      }}
+                    >
+                      <CiEdit />
                     </button>
                   </div>
 
@@ -362,7 +439,9 @@ function Flat() {
             <div className="addflat-modal-header">
               <div className="addflat-modal-title-section">
                 <MdApartment className="addflat-modal-icon" />
-                <h2 className="addflat-modal-title">Create New Scheme</h2>
+                <h2 className="addflat-modal-title">
+                  {editSchemeId ? "Edit Scheme" : "Add New Scheme"}
+                </h2>
               </div>
               <button
                 className="addflat-modal-close"
@@ -372,7 +451,12 @@ function Flat() {
               </button>
             </div>
 
-            <form onSubmit={handleCreateScheme} className="addflat-form">
+            <form
+              onSubmit={
+                editSchemeId ? handleUpdateExistingScheme : handleCreateScheme
+              }
+              className="addflat-form"
+            >
               <div className="addflat-form-section">
                 <div className="addflat-input-group">
                   <label htmlFor="schemeName" className="addflat-label">
@@ -450,7 +534,7 @@ function Flat() {
                 </button>
                 <button type="submit" className="addflat-primary-btn">
                   <FaPlus className="addflat-btn-icon" />
-                  Create Scheme
+                  {editSchemeId ? "Update Scheme" : "Create Scheme"}
                 </button>
               </div>
             </form>

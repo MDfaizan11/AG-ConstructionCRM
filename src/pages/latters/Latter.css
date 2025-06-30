@@ -1,4 +1,3 @@
-
 /* Main Wrapper */
 .latters {
   display: flex;
@@ -62,7 +61,6 @@
   }
 }
 
-
 /* offer letter */
 
 .offer_latter_form_wrapper {
@@ -74,20 +72,20 @@
   background-color: #f9f9f9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.offer_latter_downlode{
-height: 30px;
-width: 80px;
-background-color: cadetblue;
-color: white;
-border: none;
-}
-.offer_latter_close{
+.offer_latter_downlode {
   height: 30px;
-width: 80px;
-background-color: red;
-color: white;
-border: none;
-margin-left: 5px;
+  width: 80px;
+  background-color: cadetblue;
+  color: white;
+  border: none;
+}
+.offer_latter_close {
+  height: 30px;
+  width: 80px;
+  background-color: red;
+  color: white;
+  border: none;
+  margin-left: 5px;
 }
 .offer_latter_form {
   display: flex;
@@ -238,7 +236,7 @@ margin-left: 5px;
 }
 
 @media screen and (max-width: 768px) {
-  .offer_thead th, 
+  .offer_thead th,
   .offer_tbody td {
     font-size: 12px;
     padding: 8px 6px;
@@ -256,7 +254,7 @@ margin-left: 5px;
     padding: 5px;
   }
 
-  .offer_thead th, 
+  .offer_thead th,
   .offer_tbody td {
     font-size: 10px;
     padding: 6px 4px;
@@ -425,14 +423,14 @@ margin-left: 5px;
   font-size: 12px;
   text-transform: uppercase;
 }
-.doenlode_relieving{
+.doenlode_relieving {
   height: 30px;
   width: 110px;
   background-color: #4caf50;
   color: white;
   border: none;
 }
-.relieving_close_button{
+.relieving_close_button {
   height: 30px;
   width: 110px;
   background-color: red;
@@ -462,53 +460,53 @@ margin-left: 5px;
 @media screen and (max-width: 1024px) {
   .reveling_table th,
   .reveling_table td {
-      font-size: 12px;
-      padding: 10px;
+    font-size: 12px;
+    padding: 10px;
   }
 
   .latter_show_button,
   .latter_show_delete {
-      font-size: 10px;
-      padding: 4px 10px;
+    font-size: 10px;
+    padding: 4px 10px;
   }
 }
 
 @media screen and (max-width: 768px) {
   .reveling_table th,
   .reveling_table td {
-      font-size: 11px;
-      padding: 8px;
+    font-size: 11px;
+    padding: 8px;
   }
 
   .latter_show_button,
   .latter_show_delete {
-      font-size: 9px;
-      padding: 3px 8px;
+    font-size: 9px;
+    padding: 3px 8px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .reveling_table_wrapper {
-      margin: 10px 0;
+    margin: 10px 0;
   }
 
   .reveling_table th,
   .reveling_table td {
-      font-size: 10px;
-      padding: 6px;
+    font-size: 10px;
+    padding: 6px;
   }
 
   .latter_show_button,
   .latter_show_delete {
-      font-size: 8px;
-      padding: 2px 6px;
+    font-size: 8px;
+    padding: 2px 6px;
   }
 
   .reveling_table th:nth-child(3),
   .reveling_table td:nth-child(3),
   .reveling_table th:nth-child(8),
   .reveling_table td:nth-child(8) {
-      display: none; /* Hide some columns for small screens */
+    display: none; /* Hide some columns for small screens */
   }
 }
 
@@ -526,7 +524,7 @@ margin-left: 5px;
 }
 
 .relieving_letter_container img {
-  height: 100px;
+  height: 120px;
   width: auto;
   object-fit: contain;
 }
@@ -677,41 +675,41 @@ margin-left: 5px;
 
 @media (max-width: 768px) {
   .allotment_latter_form {
-      padding: 15px;
+    padding: 15px;
   }
-  
+
   .alotment_latter_form_label {
-      font-size: 13px;
+    font-size: 13px;
   }
 
   .alotment_latter_form_input {
-      font-size: 13px;
-      padding: 8px;
+    font-size: 13px;
+    padding: 8px;
   }
 
   .alotment_latter_form_button {
-      padding: 10px;
-      font-size: 14px;
+    padding: 10px;
+    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .allotment_latter_form {
-      padding: 10px;
+    padding: 10px;
   }
 
   .alotment_latter_form_label {
-      font-size: 12px;
+    font-size: 12px;
   }
 
   .alotment_latter_form_input {
-      font-size: 12px;
-      padding: 6px;
+    font-size: 12px;
+    padding: 6px;
   }
 
   .alotment_latter_form_button {
-      padding: 8px;
-      font-size: 12px;
+    padding: 8px;
+    font-size: 12px;
   }
 }
 /*  */
@@ -726,7 +724,8 @@ margin-left: 5px;
   margin: 0 auto;
 }
 
-.allotment_table th, .allotment_table td {
+.allotment_table th,
+.allotment_table td {
   padding: 12px;
   text-align: left;
   border: 1px solid #ddd;
@@ -749,7 +748,7 @@ margin-left: 5px;
   margin-right: 10px;
   padding: 8px 16px;
   border: none;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   cursor: pointer;
 }
@@ -767,38 +766,40 @@ margin-left: 5px;
 }
 
 @media (max-width: 768px) {
-  .allotment_table th, .allotment_table td {
-      padding: 8px;
-      font-size: 12px;
+  .allotment_table th,
+  .allotment_table td {
+    padding: 8px;
+    font-size: 12px;
   }
 
   .allotment_table td button {
-      padding: 6px 12px;
-      font-size: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
   }
 
   .allotment_table_wrapper {
-      overflow-x: auto;
+    overflow-x: auto;
   }
 
   .allotment_table {
-      font-size: 12px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .allotment_table th, .allotment_table td {
-      padding: 6px;
-      font-size: 10px;
+  .allotment_table th,
+  .allotment_table td {
+    padding: 6px;
+    font-size: 10px;
   }
 
   .allotment_table td button {
-      padding: 5px 10px;
-      font-size: 10px;
+    padding: 5px 10px;
+    font-size: 10px;
   }
 
   .allotment_table {
-      font-size: 10px;
+    font-size: 10px;
   }
 }
 
@@ -836,85 +837,84 @@ margin-left: 5px;
 
 @media (max-width: 768px) {
   .allotment_latter_main_container {
-      margin-left: 0; /* Remove margin for mobile */
-      padding: 15px;
+    margin-left: 0; /* Remove margin for mobile */
+    padding: 15px;
   }
 
   .allotment_latter_container {
-      padding: 15px;
+    padding: 15px;
   }
 
   .allotment_latter_container img {
-      height: 80px; /* Slightly smaller logo */
+    height: 80px; /* Slightly smaller logo */
   }
 
   .allotment_latter_container p,
   .allotment_latter_container h2 {
-      font-size: 14px;
-      line-height: 24px;
+    font-size: 14px;
+    line-height: 24px;
   }
 
   .allotment_latter_heading h2 {
-      font-size: 18px;
+    font-size: 18px;
   }
 
   .allotment_latter_heading p {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   .allotment_latter_container .allotment_latter_heading {
-      margin-top: 10px;
+    margin-top: 10px;
   }
 
   .allotment_latter_main_container button {
-      width: 100%; /* Make buttons full width for small screens */
-      margin-top: 10px;
+    width: 100%; /* Make buttons full width for small screens */
+    margin-top: 10px;
   }
 
-
   .allotment_latter_container div p {
-      margin-right: 0;
+    margin-right: 0;
   }
 }
 
 @media (max-width: 480px) {
   .allotment_latter_main_container {
-      margin-left: 0;
-      padding: 10px;
+    margin-left: 0;
+    padding: 10px;
   }
 
   .allotment_latter_container {
-      padding: 10px;
+    padding: 10px;
   }
 
   .allotment_latter_container img {
-      height: 60px; /* Further reduce logo size for very small screens */
+    height: 60px; /* Further reduce logo size for very small screens */
   }
 
   .allotment_latter_container p,
   .allotment_latter_container h2 {
-      font-size: 12px; /* Further reduce font size */
-      line-height: 20px;
+    font-size: 12px; /* Further reduce font size */
+    line-height: 20px;
   }
 
   .allotment_latter_heading h2 {
-      font-size: 16px;
+    font-size: 16px;
   }
 
   .allotment_latter_heading p {
-      font-size: 12px;
+    font-size: 12px;
   }
 
   .allotment_latter_container .allotment_latter_heading {
-      margin-top: 5px;
+    margin-top: 5px;
   }
 
   .allotment_latter_main_container button {
-      width: 100%; /* Full-width buttons for small screens */
+    width: 100%; /* Full-width buttons for small screens */
   }
 }
 .allotment_latter_downlode_button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   font-size: 16px;
   padding: 12px 24px;
@@ -1010,30 +1010,30 @@ margin-left: 5px;
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .demand_latter_form_wrapper {
-      padding: 15px;
+    padding: 15px;
   }
 
   .demand_latter_form_input {
-      font-size: 16px;
+    font-size: 16px;
   }
 
   .demand_latter_form_submit_button {
-      font-size: 18px;
+    font-size: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .demand_letter_page_heading {
-      font-size: 20px;
+    font-size: 20px;
   }
 
   .demand_latter_form_input {
-      padding: 10px;
+    padding: 10px;
   }
 
   .demand_latter_form_submit_button {
-      padding: 10px;
-      font-size: 16px;
+    padding: 10px;
+    font-size: 16px;
   }
 }
 
@@ -1082,7 +1082,7 @@ margin-left: 5px;
 }
 
 .latter_show_button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -1156,7 +1156,7 @@ margin-left: 5px;
 }
 
 .demand_latter_dowmlode_button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -1222,32 +1222,32 @@ margin-left: 5px;
 }
 
 .royalinfra_button {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
 }
 
 .royalinfra_button:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
   transform: translateY(-2px);
 }
 
 .royalinfra_button:active {
-  background-color: #1565C0;
+  background-color: #1565c0;
   transform: translateY(0);
 }
 
 .royal_loan_button {
-  background-color: #FF5722;
+  background-color: #ff5722;
   color: white;
 }
 
 .royal_loan_button:hover {
-  background-color: #E64A19;
+  background-color: #e64a19;
   transform: translateY(-2px);
 }
 
 .royal_loan_button:active {
-  background-color: #D32F2F;
+  background-color: #d32f2f;
   transform: translateY(0);
 }
 
@@ -1277,17 +1277,17 @@ margin-left: 5px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   display: inline-block;
   text-align: center;
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
 }
 
 .royalinfra_downlode_button:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
   transform: translateY(-2px);
 }
 
 .royalinfra_downlode_button:active {
-  background-color: #1565C0;
+  background-color: #1565c0;
   transform: translateY(0);
 }
 
@@ -1304,7 +1304,7 @@ margin-left: 5px;
     padding: 8px 20px;
   }
 }
-.royalloan_downlode_button{
+.royalloan_downlode_button {
   padding: 12px 30px;
   border-radius: 5px;
   font-size: 14px;
@@ -1314,8 +1314,8 @@ margin-left: 5px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   display: inline-block;
   text-align: center;
-  background-color: #2196F3;
-  color: white; 
+  background-color: #2196f3;
+  color: white;
 }
 
 /*  possession letter css */
@@ -1326,26 +1326,26 @@ margin-left: 5px;
   min-height: 88vh;
   padding: 10px;
 }
-.possession_delete{
+.possession_delete {
   height: 30px;
   width: 50px;
   background-color: red;
   color: white;
   border: none;
 }
-.possession_show{
+.possession_show {
   height: 30px;
   width: 50px;
   background-color: cadetblue;
   color: white;
   border: none;
 }
-.possion_close{
+.possion_close {
   height: 30px;
   width: 50px;
   background-color: red;
   color: white;
-  border: none;  
+  border: none;
   margin-left: 10px;
 }
 .possession_letter {
@@ -1401,34 +1401,34 @@ margin-left: 5px;
 
 @media (max-width: 768px) {
   .possession_letter {
-      padding: 20px;
+    padding: 20px;
   }
 
   .possession_letter_input {
-      font-size: 14px;
-      padding: 10px;
+    font-size: 14px;
+    padding: 10px;
   }
 
   .possession_letter_submit_button {
-      font-size: 16px;
-      padding: 12px;
+    font-size: 16px;
+    padding: 12px;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1200px) {
   .possession_letter {
-      max-width: 550px;
+    max-width: 550px;
   }
 }
 
 @media (min-width: 1201px) {
   .possession_letter {
-      max-width: 600px;
+    max-width: 600px;
   }
 }
 
 /* possion latter css */
-.possession_letter_wrapper{
+.possession_letter_wrapper {
   padding: 10px;
 }
 .possession_table {
@@ -1437,10 +1437,10 @@ margin-left: 5px;
   margin: 20px 0;
   font-size: 16px;
   text-align: left;
-
 }
 
-.possession_table th, .possession_table td {
+.possession_table th,
+.possession_table td {
   padding: 12px 15px;
   border: 1px solid #ddd;
 }
@@ -1460,35 +1460,38 @@ margin-left: 5px;
 
 @media (max-width: 768px) {
   .possession_table {
-      font-size: 14px;
+    font-size: 14px;
   }
 
-  .possession_table th, .possession_table td {
-      padding: 10px;
+  .possession_table th,
+  .possession_table td {
+    padding: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .possession_table {
-      font-size: 12px;
+    font-size: 12px;
   }
 
-  .possession_table th, .possession_table td {
-      padding: 8px;
+  .possession_table th,
+  .possession_table td {
+    padding: 8px;
   }
 
   .possession_table {
-      overflow-x: auto;
-      display: block;
+    overflow-x: auto;
+    display: block;
   }
 }
 
 @media (min-width: 1200px) {
   .possession_table {
-      font-size: 18px;
+    font-size: 18px;
   }
 
-  .possession_table th, .possession_table td {
-      padding: 15px;
+  .possession_table th,
+  .possession_table td {
+    padding: 15px;
   }
 }

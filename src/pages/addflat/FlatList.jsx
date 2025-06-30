@@ -769,6 +769,7 @@ function FlatList() {
                         value={dealPrice}
                         onChange={(e) => setDealPrice(e.target.value)}
                         placeholder="Enter deal price"
+                        required
                       />
                     </div>
 
@@ -782,6 +783,7 @@ function FlatList() {
                         value={tokenAmount}
                         onChange={(e) => setTokenAmount(e.target.value)}
                         placeholder="Enter token amount"
+                        required
                       />
                     </div>
 
@@ -795,6 +797,7 @@ function FlatList() {
                         value={agreementAmount}
                         onChange={(e) => setAgreementAmount(e.target.value)}
                         placeholder="Enter agreement amount"
+                        required
                       />
                     </div>
 
@@ -808,6 +811,7 @@ function FlatList() {
                         value={stampDutyAmount}
                         onChange={(e) => setStampDutyAmount(e.target.value)}
                         placeholder="Enter stamp duty"
+                        required
                       />
                     </div>
 
@@ -821,6 +825,7 @@ function FlatList() {
                         value={registrationAmount}
                         onChange={(e) => setRegistrationAmount(e.target.value)}
                         placeholder="Enter registration amount"
+                        required
                       />
                     </div>
 
@@ -834,6 +839,7 @@ function FlatList() {
                         value={gstAmount}
                         onChange={(e) => setGstAmount(e.target.value)}
                         placeholder="Enter GST amount"
+                        required
                       />
                     </div>
 
@@ -845,6 +851,7 @@ function FlatList() {
                         value={electricWaterAmmount}
                         onChange={(e) => setElectricWaterAmount(e.target.value)}
                         placeholder="Enter utility charges"
+                        required
                       />
                     </div>
 
@@ -856,6 +863,7 @@ function FlatList() {
                         value={legalChargesAmmout}
                         onChange={(e) => setLegalChargesAmount(e.target.value)}
                         placeholder="Enter legal charges"
+                        required
                       />
                     </div>
 

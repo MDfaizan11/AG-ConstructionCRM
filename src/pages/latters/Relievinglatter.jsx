@@ -382,7 +382,10 @@ function Relievinglatter() {
               <div className="relieving_company_details">
                 <div className="relieving_detail_row">
                   <div className="relieving_detail_text">
-                    <p>Plot No. 28, 1st Floor, Govind Prabhau Nagar,</p>
+                    <p>
+                      Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
+                      Nagar
+                    </p>
                     <p>Hudkeshwar Road, Nagpur - 440034</p>
                   </div>
                   <div className="relieving_icon_box">
@@ -390,21 +393,23 @@ function Relievinglatter() {
                   </div>
                 </div>
                 <div className="relieving_detail_row">
-                  <p className="relieving_detail_text">royaalmede@gmail.com</p>
+                  <p className="relieving_detail_text">
+                    agconstructions220@gmail.com
+                  </p>
                   <div className="relieving_icon_box">
                     <FaEnvelope size={15} color="#fff" />
                   </div>
                 </div>
                 <div className="relieving_detail_row">
-                  <p className="relieving_detail_text">www.royaalmede.co.in</p>
+                  <p className="relieving_detail_text">
+                    www.agconstructionnagpur.in
+                  </p>
                   <div className="relieving_icon_box">
                     <FaGlobe size={15} color="#fff" />
                   </div>
                 </div>
                 <div className="relieving_detail_row">
-                  <p className="relieving_detail_text">
-                    9028999253 | 9373450092
-                  </p>
+                  <p className="relieving_detail_text">+91 7620 419 075</p>
                   <div className="relieving_icon_box">
                     <FaPhoneAlt size={15} color="#fff" />
                   </div>

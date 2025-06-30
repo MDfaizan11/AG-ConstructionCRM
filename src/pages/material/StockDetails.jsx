@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../config";
+import "../material/stockDetail.css";
 function StockDetails() {
   const { id, name } = useParams();
   console.log(name);
@@ -18,9 +19,15 @@ function StockDetails() {
     useState(false);
   const [usedQuantity, setUsedQuantity] = useState("");
   const [HistoryUsedStock, setHistoryUsedStock] = useState([]);
+  const [stockOutDetailsShow, setstockOutDetailsShow] = useState(false);
+  const [ShowAddStockDetails, setShowAddStockDetails] = useState(false);
+  const [stockIndata, setStockIndata] = useState([]);
+
   function handleAddExistingStock(id) {
     setExistingStokId(id);
     setShowExistingAddStokForm(true);
+    setstockOutDetailsShow(false);
+    setShowAddStockDetails(false);
   }
   async function handleupdateexistingStock(e) {
     e.preventDefault();
@@ -57,6 +64,8 @@ function StockDetails() {
   function handleStockUsed(id) {
     setExistingStockUsedId(id);
     setExistingStockUsedFormShow(true);
+    setstockOutDetailsShow(false);
+    setShowAddStockDetails(false);
   }
   async function handleAddUsedQuantity(e) {
     e.preventDefault();
@@ -93,6 +102,8 @@ function StockDetails() {
   }
 
   async function handleCheckHistory(id) {
+    setShowAddStockDetails(false);
+    setstockOutDetailsShow(true);
     try {
       const response = await axios.get(`${BASE_URL}/products/${id}/usages`, {
         headers: {
@@ -102,6 +113,26 @@ function StockDetails() {
       });
       console.log(response.data);
       setHistoryUsedStock(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleShowAddStoreDetail(id) {
+    setstockOutDetailsShow(false);
+    setShowAddStockDetails(true);
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/products/${id}/stock-in-history`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      setStockIndata(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -125,6 +156,12 @@ function StockDetails() {
         </button>
         <button onClick={() => handleCheckHistory(id)} className="Stock_in_btn">
           View Used Stock Details
+        </button>
+        <button
+          className="Stock_in_btn"
+          onClick={() => handleShowAddStoreDetail(id)}
+        >
+          View Add Stock Details
         </button>
       </div>
 
@@ -189,8 +226,9 @@ function StockDetails() {
           </form>
         </div>
       )}
-      {HistoryUsedStock.length > 0 && (
+      {stockOutDetailsShow && HistoryUsedStock.length > 0 && (
         <div className="usedStocktable-responsive-wrapper">
+          <h2>Stock Out Details</h2>
           <table className="usedStockDetailTable">
             <thead>
               <tr>
@@ -226,6 +264,29 @@ function StockDetails() {
             </tbody>
           </table>
         </div>
+      )}
+
+      {ShowAddStockDetails && stockIndata.length > 0 && (
+        <table className="stockIndetails">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Quantity Added</th>
+              <th>Price Added</th>
+              <th>Added At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stockIndata.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.quantityAddedValue}</td>
+                <td>{item.priceAdded}</td>
+                <td>{new Date(item.addedAt).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </>
   );
