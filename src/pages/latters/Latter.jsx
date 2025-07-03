@@ -27,6 +27,13 @@ function Latter() {
     <>
       <div className="latters">
         {/* <button onClick={handleofferLatter} className='letter_buttons'> Offer Letter</button> */}
+        <button
+          className="letter_buttons"
+          onClick={() => navigate("/AgsalarySlip")}
+        >
+          {" "}
+          Salary Slip
+        </button>
         <button onClick={handleRelievinglatter} className="letter_buttons">
           Riveling Letter
         </button>

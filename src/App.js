@@ -36,6 +36,8 @@ import Notification from "./pages/Notification/Notification";
 import StockDetails from "./pages/material/StockDetails";
 import Structure from "./pages/structure/Structure";
 import StructureDetail from "./pages/structure/StructureDetail";
+import Office from "./pages/office/Office";
+import AgSalarySlip from "./pages/latters/AgSalarySlip";
 function App() {
   return (
     <BrowserRouter>
@@ -90,6 +92,8 @@ function App() {
               element={<StructureDetail />}
               path="/structureDetail/:id/:name"
             />
+            <Route path="/office" element={<Office />} />
+            <Route path="/AgsalarySlip" element={<AgSalarySlip />} />
           </Route>
         </Route>
       </Routes>

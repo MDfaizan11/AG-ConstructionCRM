@@ -35,6 +35,7 @@ function ContractorDetail() {
   const [editDate, seteditDate] = useState("");
   const [editpaymentMethod, seteditpaymentMethod] = useState("");
   const [editRemark, seteditRemark] = useState("");
+  
   useEffect(() => {
     if (!id || !token) return;
     const gettingContractor = async () => {
