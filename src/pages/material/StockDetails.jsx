@@ -22,6 +22,7 @@ function StockDetails() {
   const [stockOutDetailsShow, setstockOutDetailsShow] = useState(false);
   const [ShowAddStockDetails, setShowAddStockDetails] = useState(false);
   const [stockIndata, setStockIndata] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleAddExistingStock(id) {
     setExistingStokId(id);
@@ -31,6 +32,7 @@ function StockDetails() {
   }
   async function handleupdateexistingStock(e) {
     e.preventDefault();
+    setIsSubmitted(true);
 
     const data = new URLSearchParams();
     data.append("price", existingStockAmout);
@@ -57,7 +59,7 @@ function StockDetails() {
       }
     } catch (error) {
       console.log("Error adding stock:", error);
-      alert("Something went wrong. Please try again.");
+      setIsSubmitted(false);
     }
   }
 
@@ -69,6 +71,7 @@ function StockDetails() {
   }
   async function handleAddUsedQuantity(e) {
     e.preventDefault();
+    setIsSubmitted(true);
     if (!token) {
       alert("token is unavailable");
     }
@@ -97,7 +100,8 @@ function StockDetails() {
       }
     } catch (error) {
       console.error("Error using stock:", error);
-      alert(error.response?.data || "Failed to remove quantity");
+      setIsSubmitted(false);
+      alert("Error using stock. Please try again.");
     }
   }
 
@@ -185,6 +189,7 @@ function StockDetails() {
                 className="existing_stock_add_form_input"
                 value={existingStockAmout}
                 onChange={(e) => setexistingStockAmout(e.target.value)}
+                required
               />
               <input
                 type="text"
@@ -192,9 +197,10 @@ function StockDetails() {
                 className="existing_stock_add_form_input"
                 value={existingStockQuantity}
                 onChange={(e) => setexistingStockQuantity(e.target.value)}
+                required
               />
               <button className="existing_stock_add_form_submit_btn">
-                Submit
+               {isSubmitted?"Submitting...":"Submit"}
               </button>
             </form>
           </div>
@@ -219,9 +225,10 @@ function StockDetails() {
               placeholder="Enter Used Quantity"
               value={usedQuantity}
               onChange={(e) => setUsedQuantity(e.target.value)}
+              required
             />
             <button type="submit" className="usedstock_form_submit_button">
-              Submit
+               {isSubmitted?"Submitting...":"Submit"}
             </button>
           </form>
         </div>

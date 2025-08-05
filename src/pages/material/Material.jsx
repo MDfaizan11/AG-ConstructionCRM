@@ -47,7 +47,7 @@ function Material() {
               onClick={() => handleclick(item.id)}
               className="show_building_name_material"
             >
-              <BsFillBuildingsFill size={80} color="rgb(222 42 42)" />
+              <BsFillBuildingsFill size={80} color="#e05f2c" />
               <p>
                 <b>{item.name}</b>
               </p>

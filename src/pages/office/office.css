@@ -1,28 +1,28 @@
 /* ========== Base Styles ========== */
 :root {
   /* Color Variables */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-secondary: #ec4899;
-  --color-secondary-light: #f472b6;
-  --color-secondary-dark: #db2777;
-  --color-accent: #8b5cf6;
-  --color-accent-light: #a78bfa;
-  --color-accent-dark: #7c3aed;
+  --color-primary: #d85200;
+  --color-primary-light: #fce3d3;
+  --color-primary-dark: #a34103;
+  --color-secondary: #d82800;
+  --color-secondary-light: #ef8d72;
+  --color-secondary-dark: #a8270b;
+  --color-accent: #fbeee5;
+  --color-accent-light: #fab98b;
+  --color-accent-dark: #ed763a;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
   --color-success: #10b981;
-  --color-info: #3b82f6;
+  --color-info: #f66a3b;
 
   /* Neutral Colors */
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #64748b;
-  --color-text-tertiary: #94a3b8;
+  --color-text-primary: #3b241e;
+  --color-text-secondary: #8b6f64;
+  --color-text-tertiary: #b89e94;
   --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-bg-tertiary: #f1f5f9;
-  --color-border: #e2e8f0;
+  --color-bg-secondary: #fcf9f8;
+  --color-bg-tertiary: #f9f4f1;
+  --color-border: #f0e7e2;
 
   /* Gradients */
   --gradient-primary: linear-gradient(
@@ -37,8 +37,8 @@
   );
   --gradient-accent: linear-gradient(
     135deg,
-    var(--color-accent) 0%,
-    var(--color-accent-dark) 100%
+    var(--color-primary-light) 0%,
+    var(--color-accent) 100%
   );
   --gradient-success: linear-gradient(
     135deg,
@@ -55,7 +55,7 @@
     var(--color-danger) 0%,
     #f87171 100%
   );
-  --gradient-header: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --gradient-header: linear-gradient(135deg, #ffffff 0%, #fff3ee 100%);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -224,17 +224,17 @@ body {
 }
 
 .office-office-title {
-  font-size: 28px;
-  font-weight: 800;
-  color: white;
-  margin-bottom: var(--spacing-2);
-  letter-spacing: -0.025em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to right, #ffffff, #e0e7ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+    font-size: 28px;
+    font-weight: 800;
+    color: rgb(196, 72, 1);
+    margin-bottom: var(--spacing-2);
+    letter-spacing: -0.025em;
+    /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+    background: linear-gradient(to right, #dc3610, #dd3d17);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
 }
 
 .office-office-subtitle {
@@ -1292,13 +1292,13 @@ body {
 }
 
 .office-addofficeExpenseform-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  border-color: #ff5e00;
+  box-shadow: 0 0 0 3px rgba(255, 115, 0, 0.2);
   outline: none;
 }
 
 .office-addofficeExpenseform-submit-button {
-  background-color: #007bff;
+  background-color: #ff5100;
   color: #fff;
   border: none;
   padding: 0.9rem;
@@ -1311,7 +1311,7 @@ body {
 }
 
 .office-addofficeExpenseform-submit-button:hover {
-  background-color: #0056b3;
+  background-color: #b33900;
 }
 
 @media (min-width: 768px) {
@@ -1384,7 +1384,7 @@ body {
 /* ========== Show All Data Button ========== */
 .office-show-all-btn {
   background: var(--gradient-accent);
-  color: white;
+  color: rgb(167, 69, 4);
   padding: var(--spacing-2) var(--spacing-5);
   border-radius: var(--radius-md);
   border: none;

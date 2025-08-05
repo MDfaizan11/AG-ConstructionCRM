@@ -17,6 +17,7 @@ function SalarySlip() {
   const [salaryTo, setSalaryTo] = useState("");
   const [amount, setAmount] = useState("");
   const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const token = JSON.parse(
     localStorage.getItem("employeROyalmadeLogin")
   )?.token;
@@ -24,6 +25,7 @@ function SalarySlip() {
   const [showSalarySlip, setShowSalarySlip] = useState(true);
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     const formdata = {
       employeeName,
@@ -59,6 +61,10 @@ function SalarySlip() {
     } catch (error) {
       console.error("Error submitting the form:", error);
     }
+    finally {
+      setIsSubmitting(false);
+    
+    }
   };
 
   return (
@@ -74,6 +80,7 @@ function SalarySlip() {
               className="offer_latter_input"
               value={employeeName}
               onChange={(e) => setEmployeeName(e.target.value)}
+              required
             />
           </div>
 
@@ -84,6 +91,7 @@ function SalarySlip() {
               className="offer_latter_input"
               value={branchName}
               onChange={(e) => setBranchName(e.target.value)}
+              required
             />
           </div>
 
@@ -94,6 +102,7 @@ function SalarySlip() {
               className="offer_latter_input"
               value={todayDate || new Date().toISOString().split("T")[0]}
               onChange={(e) => setTodayDate(e.target.value)}
+              required
             />
           </div>
 
@@ -104,6 +113,7 @@ function SalarySlip() {
               className="offer_latter_input"
               value={salaryFrom || new Date().toISOString().split("T")[0]}
               onChange={(e) => setSalaryFrom(e.target.value)}
+              required
             />
           </div>
 
@@ -114,6 +124,7 @@ function SalarySlip() {
               className="offer_latter_input"
               value={salaryTo || new Date().toISOString().split("T")[0]}
               onChange={(e) => setSalaryTo(e.target.value)}
+              required
             />
           </div>
 
@@ -124,6 +135,7 @@ function SalarySlip() {
               className="offer_latter_input"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              required
             />
           </div>
 
@@ -134,12 +146,13 @@ function SalarySlip() {
               className="offer_latter_input"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
+              required
             />
           </div>
 
           <div className="offer_latter_div">
-            <button type="submit" className="offer_latter_button">
-              Submit
+            <button type="submit" className="offer_latter_button" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

@@ -41,6 +41,7 @@ function Office() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [totalFilteredAmount, setTotalFilteredAmount] = useState(0);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     async function getAllOfficeExpense() {
@@ -229,6 +230,7 @@ function Office() {
 
   async function handleAddOfficeExpense(e) {
     e.preventDefault();
+    setIsSubmitted(true);
     const body = {
       date: officeDate,
       reciverName: officeReceiverName,
@@ -259,6 +261,9 @@ function Office() {
       }
     } catch (error) {
       console.log(error);
+
+    }finally{
+      setIsSubmitted(false);
     }
   }
 
@@ -348,9 +353,7 @@ function Office() {
           </div>
           <div className="office-office-header-content">
             <h1 className="office-office-title">Office Expense Management</h1>
-            <p className="office-office-subtitle">
-              Track and manage your office expenses efficiently
-            </p>
+            
           </div>
         </div>
 
@@ -717,7 +720,7 @@ function Office() {
                 type="submit"
                 className="office-addofficeExpenseform-submit-button"
               >
-                Submit
+                {isSubmitted ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>

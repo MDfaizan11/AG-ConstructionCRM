@@ -25,6 +25,7 @@ function Addmeterial() {
   const [editStockUsedQuantity, seteditStockUsedQuantity] = useState("");
   const [editStockRemainingQuantity, seteditStockRemainingQuantity] =
     useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     async function getAllStock() {
@@ -50,6 +51,7 @@ function Addmeterial() {
 
   async function handleAddNewStock(e) {
     e.preventDefault();
+    setIsSubmitted(true);
     const body = {
       name: StockName,
       price: StockPrice,
@@ -77,6 +79,9 @@ function Addmeterial() {
       }
     } catch (error) {
       console.log(error);
+       
+    }finally{
+      setIsSubmitted(false);
     }
   }
 
@@ -190,6 +195,7 @@ function Addmeterial() {
               className="Add_stock_input"
               value={StockName}
               onChange={(e) => setStockName(e.target.value)}
+              required
             />
             <input
               type="text"
@@ -197,6 +203,7 @@ function Addmeterial() {
               className="Add_stock_input"
               value={StockPrice}
               onChange={(e) => setStockPrice(e.target.value)}
+              required
             />
             <input
               type="text"
@@ -204,14 +211,16 @@ function Addmeterial() {
               className="Add_stock_input"
               value={StockQuantity}
               onChange={(e) => setStockQuantity(e.target.value)}
+              required
             />
             <input
               type="date"
               className="Add_stock_input"
               value={StockDate}
+              required
               onChange={(e) => setStockDate(e.target.value)}
             />
-            <button className="Add_stock_submit_button"> Submit</button>
+            <button className="Add_stock_submit_button">{isSubmitted?"Submitting...":"Submit"}</button>
           </form>
         </div>
       )}

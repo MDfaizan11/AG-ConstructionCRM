@@ -32,9 +32,11 @@ function Offerlatter() {
     const [refreshKey, setRefreshKey] = useState("")
     const [isEditing, setIsEditing] = useState(false);
     const [editId, setEditId] = useState(null);
+      const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
         const formdata = {
             name,
             email,
@@ -80,6 +82,9 @@ function Offerlatter() {
             setCtc("");
         } catch (error) {
             console.log(error);
+        }
+        finally{
+            setIsSubmitting(false);
         }
     };
 
@@ -179,6 +184,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -189,6 +195,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -199,6 +206,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -209,6 +217,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -219,6 +228,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={cureentDate || new Date().toISOString().split("T")[0]}
                             onChange={(e) => setCurrentDate(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -229,6 +239,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={joiningDate || new Date().toISOString().split("T")[0]}
                             onChange={(e) => setJoiningDate(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -239,6 +250,7 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={position}
                             onChange={(e) => setPosition(e.target.value)}
+                            required
                         />
                     </div>
 
@@ -249,12 +261,14 @@ function Offerlatter() {
                             className="offer_latter_input"
                             value={ctc}
                             onChange={(e) => setCtc(e.target.value)}
+                            
+                            required
                         />
                     </div>
 
                     <div className="offer_latter_div">
-                        <button type="submit" className="offer_latter_button">
-                            {isEditing ? "Update" : "Submit"}
+                        <button type="submit" className="offer_latter_button" disabled={isSubmitting}>
+                            {isSubmitting ? "isSubmitting..." : isEditing ? "Update" : "Submit"}
                         </button>
 
                     </div>

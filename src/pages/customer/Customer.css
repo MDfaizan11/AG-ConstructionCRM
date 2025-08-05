@@ -1,30 +1,29 @@
 .customer_residency_container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  padding: 25px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 25px;
+    /* background-color: #f9f9f9; */
+    border-radius: 12px;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+    margin-top: 50px;
 }
 
 .customer_residency_name {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, #ffffff, #f0f0f0);
-  border: 1px solid #ddd;
-  border-radius: 15px;
-  box-shadow: 2px 0 25px #04847e48;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
-  height: 100px;
-  width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* background: linear-gradient(145deg, #f6ede7, #ffffff); */
+    border: 1px solid #d85200;
+    border-radius: 15px;
+    box-shadow: 2px 0 25px #d9baa740;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    height: 100px;
+    width: 300px;
 }
-
 .customer_residency_name:hover {
   transform: translateY(-8px);
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.15),
@@ -43,7 +42,7 @@
 }
 
 .customer_residency_name:hover p {
-  color: #007bff;
+    color: #d85200;
 }
 
 .customer_residency_name .card-image {
@@ -123,8 +122,8 @@
 }
 
 .booked_customer_data_table thead {
-  background-color: #0dada5;
-  color: #fff;
+    background-color: #ffe6d7;
+    color: #d85200;
 }
 
 .booked_customer_data_table thead th {
@@ -151,14 +150,14 @@
 }
 
 .booked_customer_data_show_button {
-  background-color: #0dada5;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    background-color: #d85200;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .booked_customer_data_show_button:hover {

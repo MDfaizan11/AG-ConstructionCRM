@@ -290,12 +290,7 @@ function Flat() {
 
       {/* Schemes Section */}
       <section className="addflat-schemes-section">
-        <div className="addflat-section-header">
-          <h2 className="addflat-section-title">Your Schemes</h2>
-          <p className="addflat-section-subtitle">
-            Manage and monitor all your residential projects
-          </p>
-        </div>
+        
 
         {Array.isArray(filterScheme) && filterScheme.length > 0 ? (
           <div className="addflat-schemes-grid">

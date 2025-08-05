@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { useRef } from "react";
 import html2pdf from "html2pdf.js";
+import AGImg from "../../assets/ag construction-1.png";
 
 function LatterHead() {
   const [infraletterHead, setinfraletterHead] = useState(false);
@@ -83,72 +84,53 @@ function LatterHead() {
               </button>
             </div>
             <div className="infraletter_head_wrapper" ref={letterref}>
-              <div
-                style={{
-                  textAlign: "right",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  color: "#000",
-                  marginLeft: "50px",
-                  marginTop: "20px",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  style={{
-                    height: "100px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
-                  src={Ag_logo}
-                  alt=""
-                />
-
-                <div className="relieving_company_details">
-                  <div className="relieving_detail_row">
-                    <div className="relieving_detail_text">
-                      <p>
-                        Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
-                        Nagar, Nagpur, Maharashtra 440034
-                      </p>
-                    </div>
-                    <div className="relieving_icon_box">
-                      <FaMapMarkerAlt size={15} color="#fff" />
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">
-                      agconstructions220@gmail.com
-                    </p>
-                    <div className="relieving_icon_box">
-                      <FaEnvelope size={15} color="#fff" />
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">
-                      www.agconstructionnagpur.in
-                    </p>
-                    <div className="relieving_icon_box">
-                      <FaGlobe size={15} color="#fff" />
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">+91 7620419075</p>
-                    <div className="relieving_icon_box">
-                      <FaPhoneAlt size={15} color="#fff" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <hr
-                style={{
-                  border: "1px solid rgb(167, 5, 86)",
-                  marginBottom: "2px",
-                }}
-              />
-              <hr style={{ border: "3px solid rgb(167, 5, 86)" }} />
+              <div className="relieving_header_section">
+                          <div className="relieving_company_logo_container">
+                            <img className="relieving_company_logo" src={AGImg} alt="logo" />
+                            </div>
+                            <div className="relieving_company_details">
+                             <h3>Address</h3>
+                              <div className="relieving_detail_row">
+                              
+                                <div className="relieving_detail_text">
+                                 
+                                  <p>
+                                    Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
+                                    Nagar
+                                  </p>
+                                  <p>Hudkeshwar Road, Nagpur - 440034</p>
+                                </div>
+                               
+                              </div>
+                              <div className="relieving_detail_row">
+                                <div className="relieving_icon_box">
+                                  <FaEnvelope size={20} color="#000" />
+                                </div>
+                                <p className="relieving_detail_text">
+                                  agconstructions220@gmail.com
+                                </p>
+                              
+                              </div>
+                              <div className="relieving_detail_row">
+                               <div className="relieving_icon_box">
+                                  <FaGlobe size={20} color="#000" />
+                                </div>
+                                <p className="relieving_detail_text">
+                                  www.agconstructionnagpur.in
+                                </p>
+                               
+                              </div>
+                              <div className="relieving_detail_row">
+                              <div className="relieving_icon_box">
+                                  <FaPhoneAlt size={20} color="#000" />
+                                </div>
+              
+                                <p className="relieving_detail_text">+91 7620 419 075</p>
+                                
+                              </div>
+                            </div>
+                          </div>
+              <hr className="relieving_line_thick" />
             </div>
           </div>
         </>

@@ -32,9 +32,11 @@ function Relievinglatter() {
   )?.token;
   const [isEditMode, setIsEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     const formdata = {
       employeeName,
@@ -92,6 +94,9 @@ function Relievinglatter() {
       setEditId(null);
     } catch (error) {
       console.error("Error submitting the form:", error);
+    }
+    finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -168,7 +173,7 @@ function Relievinglatter() {
   const handleDownload = () => {
     const element = letterRef.current;
     const options = {
-      margin: 0.5,
+      
       filename: `Relieving_letter_ ${myrelivinglatter.employeeName}.pdf`,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2 },
@@ -193,6 +198,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={employeeName}
               onChange={(e) => setEmployeeName(e.target.value)}
+              required
             />
           </div>
 
@@ -203,6 +209,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={currentDate || new Date().toISOString().split("T")[0]}
               onChange={(e) => setCurrentDate(e.target.value)}
+              required
             />
           </div>
           <div className="offer_latter_div">
@@ -212,6 +219,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={dateofjoining || new Date().toISOString().split("T")[0]}
               onChange={(e) => setdateofjoining(e.target.value)}
+              required
             />
           </div>
 
@@ -222,6 +230,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={resignationDate || new Date().toISOString().split("T")[0]}
               onChange={(e) => setResignationDate(e.target.value)}
+              required
             />
           </div>
 
@@ -232,6 +241,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={lastWorkingDate || new Date().toISOString().split("T")[0]}
               onChange={(e) => setLastWorkingDate(e.target.value)}
+              required
             />
           </div>
 
@@ -242,6 +252,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={designation}
               onChange={(e) => setDesignation(e.target.value)}
+              required
             />
           </div>
 
@@ -252,6 +263,7 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
+              required
             />
           </div>
 
@@ -262,12 +274,13 @@ function Relievinglatter() {
               className="offer_latter_input"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
+              required
             />
           </div>
 
           <div className="offer_latter_div">
-            <button type="submit" className="offer_latter_button">
-              {isEditMode ? "Update" : "Submit"}
+            <button type="submit" className="offer_latter_button" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : isEditMode ? "Update" : "Submit"}
             </button>
           </div>
         </form>
@@ -378,46 +391,52 @@ function Relievinglatter() {
 
           <div className="relieving_letter_container" ref={letterRef}>
             <div className="relieving_header_section">
+            <div className="relieving_company_logo_container">
               <img className="relieving_company_logo" src={AGImg} alt="logo" />
+              </div>
               <div className="relieving_company_details">
+               <h3>Address</h3>
                 <div className="relieving_detail_row">
+                
                   <div className="relieving_detail_text">
+                   
                     <p>
                       Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
                       Nagar
                     </p>
                     <p>Hudkeshwar Road, Nagpur - 440034</p>
                   </div>
-                  <div className="relieving_icon_box">
-                    <FaMapMarkerAlt size={15} color="#fff" />
-                  </div>
+                 
                 </div>
                 <div className="relieving_detail_row">
+                  <div className="relieving_icon_box">
+                    <FaEnvelope size={20} color="#000" />
+                  </div>
                   <p className="relieving_detail_text">
                     agconstructions220@gmail.com
                   </p>
-                  <div className="relieving_icon_box">
-                    <FaEnvelope size={15} color="#fff" />
-                  </div>
+                
                 </div>
                 <div className="relieving_detail_row">
+                 <div className="relieving_icon_box">
+                    <FaGlobe size={20} color="#000" />
+                  </div>
                   <p className="relieving_detail_text">
                     www.agconstructionnagpur.in
                   </p>
-                  <div className="relieving_icon_box">
-                    <FaGlobe size={15} color="#fff" />
-                  </div>
+                 
                 </div>
                 <div className="relieving_detail_row">
-                  <p className="relieving_detail_text">+91 7620 419 075</p>
-                  <div className="relieving_icon_box">
-                    <FaPhoneAlt size={15} color="#fff" />
+                <div className="relieving_icon_box">
+                    <FaPhoneAlt size={20} color="#000" />
                   </div>
+
+                  <p className="relieving_detail_text">+91 7620 419 075</p>
+                  
                 </div>
               </div>
             </div>
 
-            <hr className="relieving_line_thin" />
             <hr className="relieving_line_thick" />
 
             <h2 className="relieving_letter_heading">
@@ -455,8 +474,7 @@ function Relievinglatter() {
             </p>
 
             <p className="relieving_paragraph">
-              The details of your employment with Royaalmede Jan Dhan Multi
-              Urban Nidhi LID are as below:
+              The details of your employment with AG Construction are as below:
             </p>
 
             <ul className="relieving_employment_details">
@@ -494,7 +512,7 @@ function Relievinglatter() {
             </p>
             <p className="relieving_paragraph">Thank you.</p>
             <p className="relieving_paragraph">
-              For Royaalmede Jan Dhan Multi Urban Nidhi LID
+              For AG Construction
             </p>
 
             <div className="relieving_signature">

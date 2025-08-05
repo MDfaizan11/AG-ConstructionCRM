@@ -1,10 +1,9 @@
 .supervisor_back_button {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 550px;
+    justify-content: end;
+    align-items: end;
+    /* margin-left: 550px; */
 }
-
 .supervisor_back_button button {
     height: 40px;
     width: 120px;
@@ -19,18 +18,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 85vh;
+    /* min-height: 85vh; */
     background-color: #f9f9f9;
-    padding: 20px;
+    /* padding: 20px; */
 }
-
 .app_user_registration_form {
     background: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    width: 400px;
+    /* max-width: 400px; */
 }
 
 .app_user_registration_form_label {
@@ -50,15 +48,15 @@
 }
 
 .app_user_registration_form_input:focus {
-    border-color: #007BFF;
+    border-color: #ff5500;
     outline: none;
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 0 4px rgba(255, 98, 0, 0.3);
 }
 
 .app_user_registration_form_submit_button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #e34004;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -68,7 +66,7 @@
 }
 
 .app_user_registration_form_submit_button:hover {
-    background-color: #0056b3;
+    background-color: #bc2d02;
 }
 
 /* Responsive Design */
@@ -149,8 +147,8 @@
 }
 
 .supervisor_table_thead {
-    background-color: #007bff;
-    color: white;
+    background-color: #fdf3e3;
+    color: rgb(228, 80, 0);
 }
 
 .supervisor_table th,
@@ -290,13 +288,13 @@
 }
 
 .selct_site_dropdown_select:focus {
-    border-color: #3498db;
+    border-color: #db6334;
     outline: none;
 }
 
 .selct_site_dropdown_submit_button {
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #db7134;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -307,7 +305,7 @@
 }
 
 .selct_site_dropdown_submit_button:hover {
-    background-color: #2980b9;
+    background-color: #b95229;
 }
 
 @media (max-width: 768px) {
@@ -339,7 +337,7 @@
 .alloted_site_button{
     height: 35px;
     width: 100px;
-    background-color: #3498db;
+    background-color: #db6c34;
     border: none;
     border-radius: 5px;
     color: white;
@@ -347,7 +345,7 @@
 .remove_site_button{
     height: 35px;
     width: 100px;
-    background-color: #3498db;
+    background-color: #db3434;
     border: none;
     border-radius: 5px;
     color: white;  
@@ -356,7 +354,7 @@
 .delete_supervisor_button{
     height: 35px;
     width: 100px;
-    background-color: red;
+    background-color: rgb(255, 55, 0);
     border: none;
     border-radius: 5px;
     color: white;  

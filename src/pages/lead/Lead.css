@@ -182,46 +182,53 @@
   border: none;
 }
 .lead_search_with_button button:nth-child(1) {
-  background-color: #ff9800;
-  color: white;
-  font-size: 15px;
-  font-weight: 700;
+    background-color: #ffffff;
+    color: #ff9800;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #ff9800;
 }
 .lead_search_with_button button:nth-child(2) {
-  background-color: #f44336;
-  color: white;
+  background-color: #ffffff;
+  color: #f44336;
   font-size: 15px;
   font-weight: 700;
+  border:1px solid #f44336;
 }
 .lead_search_with_button button:nth-child(3) {
-  background-color: #2196f3;
-  color: white;
+  background-color: #ffffff;
+  color: #2196f3;
   font-size: 15px;
   font-weight: 700;
+  border: 1px solid #2196f3;
 }
 .lead_search_with_button button:nth-child(4) {
-  background-color: #9c27b0;
-  color: white;
+  background-color: #ffffff;
+  color: #9c27b0;
   font-size: 15px;
   font-weight: 700;
+  border:1px solid #9c27b0;
 }
 .lead_search_with_button button:nth-child(5) {
-  background-color: #009688;
-  color: white;
+  background-color: #ffffff;
+  color: #009688;
   font-size: 15px;
   font-weight: 700;
+  border: 1px solid #009688;
 }
 .lead_search_with_button button:nth-child(6) {
-  background-color: #4caf50;
-  color: white;
+  background-color: #ffffff;
+  color: #4caf50;
   font-size: 15px;
   font-weight: 700;
+  border: 1px solid #4caf50;
 }
 .lead_search_with_button button:nth-child(7) {
-  background-color: #ffc107;
-  color: white;
+  background-color: #ffffff;
+  color: #ffc107;
   font-size: 15px;
   font-weight: 700;
+  border: 1px solid #ffc107;
 }
 .lead-show-table {
   background-color: white;
@@ -356,12 +363,11 @@
   padding: 12px 15px;
   border: 1px solid #ddd;
 }
-
 .responsive-table th {
-  background-color: #d65b3c;
-  font-weight: bold;
-  color: white;
-  border: 1px solid #ddd;
+    background-color: #fff2ef;
+    font-weight: bold;
+    color: #dc641a;
+    border: 1px solid #ddd;
 }
 
 .responsive-table tr:nth-child(even) {

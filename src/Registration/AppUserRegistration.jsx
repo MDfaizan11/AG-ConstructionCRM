@@ -18,8 +18,10 @@ function AppUserRegistration() {
   const [refreshKey, setRefreshkey] = useState(0);
   const [removesiteDropdown, setremovesiteDropdown] = useState(false);
   const [removeSuperVisorId, setremoveSuperVisorId] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
 
     const formData = {
       name,
@@ -39,6 +41,7 @@ function AppUserRegistration() {
       }
     } catch (error) {
       console.error(error);
+      setIsSubmitted(false);
     }
 
     setName("");
@@ -64,9 +67,7 @@ function AppUserRegistration() {
     getAllSupervisor();
   }, [refreshKey]);
 
-  function handleback() {
-    window.history.back();
-  }
+  
 
   function getSuperVisorId(id) {
     setSuperVisorId(id);
@@ -146,9 +147,7 @@ function AppUserRegistration() {
       <h2 style={{ textAlign: "center", marginTop: "50px" }}>
         Supervisor Registration
       </h2>
-      <div className="supervisor_back_button">
-        <button onClick={handleback}> Back</button>
-      </div>
+      
       <div className="app_user_registration_form_wrapper">
         <form onSubmit={handleSubmit} className="app_user_registration_form">
           <div>
@@ -162,6 +161,7 @@ function AppUserRegistration() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter name"
               className="app_user_registration_form_input"
+              required
             />
           </div>
 
@@ -176,6 +176,7 @@ function AppUserRegistration() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email"
               className="app_user_registration_form_input"
+               required
             />
           </div>
 
@@ -193,14 +194,16 @@ function AppUserRegistration() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
               className="app_user_registration_form_input"
+              required
             />
           </div>
 
           <button
             type="submit"
             className="app_user_registration_form_submit_button"
+            disabled={isSubmitted}
           >
-            Submit
+            {isSubmitted ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>

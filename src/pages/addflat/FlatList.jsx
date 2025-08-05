@@ -79,6 +79,7 @@ function FlatList() {
   // const [customerId, setCustomerId] = useState("");
   const [ShowEditPlotDetail, setShowEditPlotDetail] = useState(false);
   const [EditPlotId, setEditPlotId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const token = JSON.parse(
     localStorage.getItem("employeROyalmadeLogin")
@@ -127,6 +128,7 @@ function FlatList() {
 
   async function handleNewFlat(e) {
     e.preventDefault();
+    setIsSubmitting(true);
 
     if (
       !Residency ||
@@ -170,6 +172,8 @@ function FlatList() {
     } catch (error) {
       console.error("Error creating residency:", error);
       alert("Failed to create residency. Please try again.");
+    } finally {
+      setIsSubmitting(false); // Re-enable the button after submission completes
     }
   }
 
@@ -226,6 +230,7 @@ function FlatList() {
 
   async function handleAddCustomer(e) {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = {
       dealPrice: dealPrice.replace(/,/g, ""),
       tokenAmount: tokenAmount.replace(/,/g, ""),
@@ -283,6 +288,7 @@ function FlatList() {
       setShowCustomer(false);
     } catch (error) {
       console.log(error);
+      setIsSubmitting(false);
     }
   }
 
@@ -330,6 +336,7 @@ function FlatList() {
 
   async function hanldeUpdateFlat(e) {
     e.preventDefault();
+    setIsSubmitting(true)
     if (
       !Residency ||
       !flatType ||
@@ -340,15 +347,15 @@ function FlatList() {
     ) {
       return alert("Please fill in all fields before submitting!");
     }
-    const obj = {
-      name: newname,
-      residencyType: Residency,
-      flatType: flatType,
-      availabilityStatus: Availability,
-      floorNumber: floorNumber,
-      identifier: FlatNumber,
-      price: flatPrice.replace(/,/g, ""),
-    };
+   const obj = {
+  name: newname,
+  residencyType: Residency,
+  flatType: flatType,
+  availabilityStatus: Availability,
+  floorNumber: floorNumber,
+  identifier: FlatNumber,
+  price: String(flatPrice).replace(/,/g, ""),
+};
     try {
       const response = await axios.put(
         `${BASE_URL}/updateresidency/${EditPlotId}`,
@@ -374,6 +381,9 @@ function FlatList() {
       }
     } catch (error) {
       console.log(error);
+    }
+    finally{
+       setIsSubmitting(false);
     }
   }
   return (
@@ -726,9 +736,13 @@ function FlatList() {
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="submit-btn">
+                  <button
+                    type="submit"
+                    className="submit-btn"
+                    disabled={isSubmitting} // Disable button based on isSubmitting state
+                  >
                     <FaPlus />
-                    Add Flat
+                    {isSubmitting ? "Submitting..." : "Add Flat"}
                   </button>
                 </div>
               </form>
@@ -1037,9 +1051,9 @@ function FlatList() {
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="submit-btn">
+                  <button type="submit" className="submit-btn" disabled={isSubmitting}>
                     <FaUserPlus />
-                    Add Customer
+                    {isSubmitting ? "Adding..." : "Add Customer"}
                   </button>
                 </div>
               </form>
@@ -1111,16 +1125,7 @@ function FlatList() {
 
                   <div className="form-group">
                     <label>Availability Status</label>
-                    <select
-                      className="form-select"
-                      value={Availability}
-                      onChange={(e) => setAvailability(e.target.value)}
-                      required
-                    >
-                      <option value="">Select Status</option>
-                      <option value="AVAILABLE">Available</option>
-                      {/* <option value="BOOKED">Booked</option> */}
-                    </select>
+                    <div>{Availability}</div>
                   </div>
 
                   <div className="form-group">
@@ -1166,9 +1171,9 @@ function FlatList() {
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="submit-btn">
+                  <button type="submit" className="submit-btn" disabled={isSubmitting}>
                     <FaPlus />
-                    Update Flat
+                   {isSubmitting ? " Updating..." : " Update Flat"}
                   </button>
                 </div>
               </form>

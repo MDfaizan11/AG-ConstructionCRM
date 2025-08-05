@@ -12,12 +12,13 @@ import Ag_logo from "../../assets/ag construction-1.png";
 import "./Latter.css";
 import axios from "axios";
 import { BASE_URL } from "../../config";
+import AGImg from "../../assets/ag construction-1.png";
 function Possession() {
   const token = JSON.parse(
     localStorage.getItem("employeROyalmadeLogin")
   )?.token;
   const [showPossession, setshowPossession] = useState(false);
-  const letterref = useRef();
+ const letterRef = useRef();
   const [from, setFrom] = useState("");
   const [date, setDate] = useState("");
   const [yourName, setYourName] = useState("");
@@ -31,11 +32,12 @@ function Possession() {
   const [letterdata, setLetterData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleDownlodepossession() {
-    const element = letterref.current;
+    const element = letterRef.current;
     const options = {
-      margin: 0.5,
+      
       filename: `${letterdata.name} possession_letter.pdf`,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2 },
@@ -47,6 +49,7 @@ function Possession() {
 
   async function handlepossessionSubmit(e) {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const formdata = {
       // fromName: from,
@@ -94,6 +97,8 @@ function Possession() {
       setrefreshKey((prev) => prev + 1);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsSubmitting(false);
     }
   }
   function resetForm() {
@@ -197,6 +202,7 @@ function Possession() {
             className="possession_letter_input"
             value={date || new Date().toISOString().split("T")[0]}
             onChange={(e) => setDate(e.target.value)}
+            required
           />
           <input
             type="text"
@@ -204,6 +210,7 @@ function Possession() {
             className="possession_letter_input"
             value={yourName}
             onChange={(e) => setYourName(e.target.value)}
+            required
           />
           <input
             type="text"
@@ -211,6 +218,7 @@ function Possession() {
             className="possession_letter_input"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            required
           />
 
           <input
@@ -219,6 +227,7 @@ function Possession() {
             className="possession_letter_input"
             value={flatNumber}
             onChange={(e) => setFlatNumber(e.target.value)}
+            required
           />
           <input
             type="text"
@@ -226,6 +235,7 @@ function Possession() {
             className="possession_letter_input"
             value={residencyName}
             onChange={(e) => setResidencyName(e.target.value)}
+            required
           />
           <input
             type="text"
@@ -233,9 +243,13 @@ function Possession() {
             className="possession_letter_input"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            required
           />
-          <button className="possession_letter_submit_button">
-            {isEditMode ? "Update" : "Submit"}
+          <button
+            className="possession_letter_submit_button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : isEditMode ? "Update" : "Submit"}
           </button>
         </form>
       </div>
@@ -325,128 +339,100 @@ function Possession() {
                 Close
               </button>
             </div>
-            <div className="infraletter_head_wrapper" ref={letterref}>
-              <div
-                style={{
-                  textAlign: "right",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  color: "#000",
-                  marginLeft: "10px",
-                  marginTop: "20px",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  style={{
-                    height: "100px",
-                    width: "auto",
-                    objectFit: "contain",
-                  }}
-                  src={Ag_logo}
-                  alt=""
-                />
+          <div className="relieving_letter_container" ref={letterRef}>
+           <div className="relieving_header_section">
+                       <div className="relieving_company_logo_container">
+                         <img className="relieving_company_logo" src={AGImg} alt="logo" />
+                         </div>
+                         <div className="relieving_company_details">
+                          <h3>Address</h3>
+                           <div className="relieving_detail_row">
+                           
+                             <div className="relieving_detail_text">
+                              
+                               <p>
+                                 Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
+                                 Nagar
+                               </p>
+                               <p>Hudkeshwar Road, Nagpur - 440034</p>
+                             </div>
+                            
+                           </div>
+                           <div className="relieving_detail_row">
+                             <div className="relieving_icon_box">
+                               <FaEnvelope size={20} color="#000" />
+                             </div>
+                             <p className="relieving_detail_text">
+                               agconstructions220@gmail.com
+                             </p>
+                           
+                           </div>
+                           <div className="relieving_detail_row">
+                            <div className="relieving_icon_box">
+                               <FaGlobe size={20} color="#000" />
+                             </div>
+                             <p className="relieving_detail_text">
+                               www.agconstructionnagpur.in
+                             </p>
+                            
+                           </div>
+                           <div className="relieving_detail_row">
+                           <div className="relieving_icon_box">
+                               <FaPhoneAlt size={20} color="#000" />
+                             </div>
+           
+                             <p className="relieving_detail_text">+91 7620 419 075</p>
+                             
+                           </div>
+                         </div>
+                       </div>
 
-                <div className="relieving_company_details">
-                  <div className="relieving_detail_row">
-                    <div className="relieving_detail_text">
-                      <p>
-                        Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
-                        Nagar
-                      </p>
-                      <p>Hudkeshwar Road, Nagpur - 440034</p>
-                    </div>
-                    <div className="relieving_icon_box">
-                      <FaMapMarkerAlt size={15} color="#fff" />
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">
-                      agconstructions220@gmail.com
-                    </p>
-                    <div className="relieving_icon_box">
-                      <FaEnvelope size={15} color="#fff" />
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">
-                      www.agconstructionnagpur.in
-                    </p>
-                    <div className="relieving_icon_box">
-                      <FaGlobe size={15} color="#fff" />
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <p className="relieving_detail_text">+91 7620 419 075</p>
-                    <div className="relieving_icon_box">
-                      <FaPhoneAlt size={15} color="#fff" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <hr className="relieving_line_thick" />
 
-              <hr
-                style={{
-                  border: "1px solid rgb(167, 5, 86)",
-                  marginBottom: "2px",
-                  marginTop: "-5px",
-                }}
-              />
-              <hr
-                style={{
-                  border: "3px solid rgb(167, 5, 86)",
-                  marginTop: "4px",
-                }}
-              />
-
-              {/* <p style={{ marginTop: "25px", marginLeft: "80px" }}>From:- <b>{letterdata.fromName}   </b>      </p> */}
-              <p style={{ marginTop: "25px", marginLeft: "80px" }}>
+            {/* <p style={{ marginTop: "25px", marginLeft: "80px" }}>From:- <b>{letterdata.fromName}   </b>      </p> */}
+            <p style={{ marginTop: "25px", marginLeft: "80px" }}>
+              {" "}
+              Date:{" "}
+              <b>
                 {" "}
-                Date:{" "}
-                <b>
-                  {" "}
-                  {new Date(letterdata.date).toLocaleDateString("en-GB")}{" "}
-                </b>{" "}
-              </p>
-              <p style={{ marginLeft: "80px" }}>To, </p>
-              <p style={{ marginLeft: "80px" }}> Mr./Mrs./Ms. </p>
-              <p style={{ marginLeft: "80px" }}>
-                {" "}
-                <b> {letterdata.name} </b>
-              </p>
-              <p style={{ marginTop: "25px", marginLeft: "80px" }}>
-                Sub: - Handing over possession of{" "}
-              </p>
+                {new Date(letterdata.date).toLocaleDateString("en-GB")}{" "}
+              </b>{" "}
+            </p>
+            <p style={{ marginLeft: "80px" }}>To, </p>
+            <p style={{ marginLeft: "80px" }}> Mr./Mrs./Ms. </p>
+            <p style={{ marginLeft: "80px" }}>
+              {" "}
+              <b> {letterdata.name} </b>
+            </p>
+            <p style={{ marginTop: "25px", marginLeft: "80px" }}>
+              Sub: - Handing over possession of{" "}
+            </p>
 
-              <p
-                style={{
-                  marginTop: "25px",
-                  marginLeft: "80px",
-                  marginRight: "10px",
-                }}
-              >
-                Dear Sir/Madam, I, the undersigned, Mr./Mrs./Ms.{" "}
-                <b>{letterdata.name}</b> state that I have transferred my above
-                flat to you, Mr./Mrs./Ms.{letterdata.name} and have since
-                received full payment towards the transfer of above Flat{" "}
-                <b>{letterdata.flatNo} </b>and Shares of Society. Since,{" "}
-                <b>{letterdata.address} </b> ,{" "}
-                <b> {letterdata.residencyName} </b>I have received full payment
-                from you, I relinquish my rights for the above flat and hand
-                over possession of the same, and you are at liberty to use
-                and/or to sell, transfer, sublet at your will as you may wish
-                within the rules and regulations of the society and I will have
-                no objection or rights for the said flat.
-              </p>
+            <p
+              style={{
+                marginTop: "25px",
+                marginLeft: "80px",
+                marginRight: "10px",
+              }}
+            >
+              Dear Sir/Madam, I, the undersigned, Mr./Mrs./Ms.{" "}
+              <b>{letterdata.name}</b> state that I have transferred my above
+              flat to you, Mr./Mrs./Ms.{letterdata.name} and have since received
+              full payment towards the transfer of above Flat{" "}
+              <b>{letterdata.flatNo} </b>and Shares of Society. Since,{" "}
+              <b>{letterdata.address} </b> , <b> {letterdata.residencyName} </b>
+              I have received full payment from you, I relinquish my rights for
+              the above flat and hand over possession of the same, and you are
+              at liberty to use and/or to sell, transfer, sublet at your will as
+              you may wish within the rules and regulations of the society and I
+              will have no objection or rights for the said flat.
+            </p>
 
-              <p style={{ marginLeft: "80px", marginTop: "60px" }}>
-                faithfully,
-              </p>
-              <p style={{ marginLeft: "80px", marginTop: "50px" }}>
-                (ROYAALMEDE INFRAA)
-              </p>
-            </div>
+            <p style={{ marginLeft: "80px", marginTop: "60px" }}>faithfully,</p>
+            <p style={{ marginLeft: "80px", marginTop: "50px" }}>
+              (AG Construction)
+            </p>
+          </div>
           </div>
         </>
       )}

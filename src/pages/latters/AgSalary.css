@@ -85,15 +85,13 @@
   background-color: #ffffff;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  padding: 30px;
   border: 1px solid #e5e7eb;
 }
 
 .AgSalarySlip-slip-header {
   text-align: center;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.75rem;
+ 
 }
 
 .AgSalarySlip-slip-title {

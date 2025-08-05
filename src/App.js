@@ -38,6 +38,7 @@ import Structure from "./pages/structure/Structure";
 import StructureDetail from "./pages/structure/StructureDetail";
 import Office from "./pages/office/Office";
 import AgSalarySlip from "./pages/latters/AgSalarySlip";
+import Subadmin from "./pages/addEmployes/Subadmin";
 function App() {
   return (
     <BrowserRouter>
@@ -94,6 +95,7 @@ function App() {
             />
             <Route path="/office" element={<Office />} />
             <Route path="/AgsalarySlip" element={<AgSalarySlip />} />
+            <Route path="/Subadmin" element={<Subadmin />} />
           </Route>
         </Route>
       </Routes>

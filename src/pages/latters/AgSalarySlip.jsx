@@ -3,6 +3,13 @@ import html2pdf from "html2pdf.js";
 import "./AgSalary.css";
 import { BASE_URL } from "../../config";
 import axios from "axios";
+import {
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaGlobe,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import AGImg from "../../assets/ag construction-1.png";
 
 function AgSalarySlip() {
   const token = JSON.parse(
@@ -33,6 +40,7 @@ function AgSalarySlip() {
   const slipRef = useRef(null);
   const [ShowSlip, setShowSlip] = useState(false);
   const [editId, setEditId] = useState(null);
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,6 +68,7 @@ function AgSalarySlip() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const data = {
       ...formData,
       basic: parseFloat(formData.basic) || 0,
@@ -146,6 +155,10 @@ function AgSalarySlip() {
     } catch (err) {
       console.error("Failed to submit/update salary slip:", err);
       alert("Operation failed. Please try again.");
+     
+    }
+    finally {
+      setIsSubmitting(false); // Reset loading state
     }
   };
 
@@ -181,7 +194,7 @@ function AgSalarySlip() {
       return;
     }
     const opt = {
-      margin: 0.5,
+      margin: 0.3,
       filename: `AG_Construction_Salary_Slip_${submittedData.employeeId}_${submittedData.month}.pdf`,
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2 },
@@ -436,8 +449,8 @@ function AgSalarySlip() {
               />
             </div>
           </div>
-          <button type="submit" className="AgSalarySlip-submit-button">
-            {editId ? "Update Salary Slip" : "Generate Salary Slip"}
+          <button type="submit" className="AgSalarySlip-submit-button" disabled={isSubmitting}>
+            {isSubmitting ? "generating..." : editId ? "Update Salary Slip" : "Generate Salary Slip"}
           </button>
         </form>
       </div>
@@ -497,11 +510,57 @@ function AgSalarySlip() {
         <div className="AgSalarySlip-slip-container">
           <div className="Print_section" ref={slipRef}>
             <div className="AgSalarySlip-slip-header">
-              <h1 className="AgSalarySlip-slip-title">AG Construction</h1>
-              <h2 className="AgSalarySlip-slip-subtitle">Salary Slip</h2>
-              <p className="AgSalarySlip-slip-month">
+               <div className="relieving_header_section">
+                          <div className="relieving_company_logo_container">
+                            <img className="relieving_company_logo" src={AGImg} alt="logo" style={{height: "215px"}} />
+                            </div>
+                            <div className="relieving_company_details">
+                             <h3>Address</h3>
+                              <div className="relieving_detail_row">
+                              
+                                <div className="relieving_detail_text">
+                                 
+                                  <p>
+                                    Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
+                                    Nagar
+                                  </p>
+                                  <p>Hudkeshwar Road, Nagpur - 440034</p>
+                                </div>
+                               
+                              </div>
+                              <div className="relieving_detail_row">
+                                <div className="relieving_icon_box">
+                                  <FaEnvelope size={20} color="#000" />
+                                </div>
+                                <p className="relieving_detail_text">
+                                  agconstructions220@gmail.com
+                                </p>
+                              
+                              </div>
+                              <div className="relieving_detail_row">
+                               <div className="relieving_icon_box">
+                                  <FaGlobe size={20} color="#000" />
+                                </div>
+                                <p className="relieving_detail_text">
+                                  www.agconstructionnagpur.in
+                                </p>
+                               
+                              </div>
+                              <div className="relieving_detail_row">
+                              <div className="relieving_icon_box">
+                                  <FaPhoneAlt size={20} color="#000" />
+                                </div>
+              
+                                <p className="relieving_detail_text">+91 7620 419 075</p>
+                                
+                              </div>
+                            </div>
+                          </div>
+              
+                          <hr className="relieving_line_thick" />
+              <h3 className="AgSalarySlip-slip-month">
                 Month: {submittedData.month}
-              </p>
+              </h3>
             </div>
             <div className="AgSalarySlip-slip-details">
               <div className="AgSalarySlip-employee-info">
@@ -611,10 +670,7 @@ function AgSalarySlip() {
                 </p>
               </div>
             </div>
-            <div className="AgSalarySlip-slip-footer">
-              <p>Generated by AG Construction</p>
-              <p>Date: {new Date().toLocaleDateString("en-IN")}</p>
-            </div>
+           
           </div>
 
           <button

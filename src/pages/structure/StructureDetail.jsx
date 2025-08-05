@@ -24,6 +24,7 @@ function StructureDetail() {
   const [Editdate, setEditDate] = useState("");
   const [Editamount, setEditAmount] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     async function getStructurePayment() {
@@ -61,6 +62,7 @@ function StructureDetail() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = {
       payableName,
       remark,
@@ -88,6 +90,10 @@ function StructureDetail() {
       }
     } catch (error) {
       console.log(error);
+      
+    }
+    finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -271,6 +277,7 @@ function StructureDetail() {
                 type="text"
                 value={payableName}
                 onChange={(e) => setPayableName(e.target.value)}
+                required
               />
             </div>
 
@@ -280,6 +287,7 @@ function StructureDetail() {
                 type="text"
                 value={remark}
                 onChange={(e) => setRemark(e.target.value)}
+                required
               />
             </div>
 
@@ -289,6 +297,7 @@ function StructureDetail() {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
+                required
               />
             </div>
 
@@ -298,6 +307,7 @@ function StructureDetail() {
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
+                required
               />
             </div>
 
@@ -305,7 +315,7 @@ function StructureDetail() {
               type="submit"
               className="structuralPaymentAddform-submitBtn"
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>

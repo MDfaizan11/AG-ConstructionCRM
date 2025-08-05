@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { BASE_URL } from "../../config";
+import { PiBuildingApartmentFill } from "react-icons/pi";
 function AddCustomer() {
   const token = JSON.parse(
     localStorage.getItem("employeROyalmadeLogin")
@@ -83,7 +84,8 @@ function AddCustomer() {
               className="customer_residency_name"
               onClick={() => residencyCustomerName(item.id)}
             >
-              <p>Project Name : {item.name}</p>
+              <PiBuildingApartmentFill style={{color:"#d85200", fontSize:"35px"}} /> 
+              <p>{item.name}</p>
             </div>
           ))
         ) : (

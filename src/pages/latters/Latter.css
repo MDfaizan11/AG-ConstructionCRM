@@ -13,7 +13,7 @@
 
 /* Buttons */
 .letter_buttons {
-  background: #0dada5;
+  background: #d64400;
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
@@ -27,7 +27,7 @@
 }
 
 .letter_buttons:hover {
-  background: #0056b3;
+  background: #6a2201;
   transform: scale(1.05);
 }
 
@@ -60,6 +60,10 @@
     padding: 10px;
   }
 }
+
+
+
+
 
 /* offer letter */
 
@@ -518,16 +522,16 @@
 
 .relieving_letter_container {
   margin: 20px auto;
-  border: 1px solid #ddd;
-  padding: 20px;
+ 
+  /* padding: 20px; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.relieving_letter_container img {
+/* .relieving_letter_container img {
   height: 120px;
   width: auto;
   object-fit: contain;
-}
+} */
 
 .dynamic {
   color: #555;
@@ -546,7 +550,7 @@
   }
 
   .relieving_letter_container {
-    padding: 10px;
+    /* padding: 10px; */
   }
 
   .relieving_letter_container > div {
@@ -554,10 +558,10 @@
     align-items: flex-start;
   }
 
-  .relieving_letter_container img {
+  /* .relieving_letter_container img {
     height: 80px;
     margin-bottom: 10px;
-  }
+  } */
 
   .relieving_letter_container ul {
     margin-left: 20px;
@@ -611,7 +615,7 @@
   }
 
   .relieving_letter_container {
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   .relieving_letter_container ul li {
