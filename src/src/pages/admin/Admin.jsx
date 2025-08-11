@@ -66,6 +66,19 @@ function Admin() {
 
     { icon: RiFilePaper2Fill, label: "Letter", path: "/letter" },
   ];
+  const subAdminMenuItems = [
+    { icon: FaTachometerAlt, label: "Dashboard", path: "/" },
+    { icon: FaFileAlt, label: "Lead Management", path: "/lead" },
+    { icon: FaLandmark, label: "Land Management", path: "/landpurchase" },
+    { icon: FaBuilding, label: "Flat Management", path: "/flat" },
+    { icon: FaUsers, label: "Customer Details", path: "/clist" },
+    { icon: FaBoxes, label: "Stock Management", path: "/material" },
+    { icon: FaUsers, label: "Office Management", path: "/office" },
+    { icon: FaUserFriends, label: "Add Staff", path: "/employee" },
+    { icon: FaUsers, label: "Structure", path: "/structure" },
+
+    { icon: RiFilePaper2Fill, label: "Letter", path: "/letter" },
+  ];
 
   const supervisorMenuItems = [
     { icon: FaBoxes, label: "Stock Management", path: "/material" },
@@ -83,12 +96,13 @@ function Admin() {
     switch (role) {
       case "Admin":
         return adminMenuItems;
-      case "Supervisor":
-      case "Superisor": // Handle potential typo in response data
+      case "SubAdmin":
+        return subAdminMenuItems;
+      case "Supervisor": // Handle potential typo in response data
         return supervisorMenuItems;
 
-      case "AppUser":
-        return appUserMenuItems;
+      case "Employee":
+        return employeeMenuItems;
       default:
         return [];
     }

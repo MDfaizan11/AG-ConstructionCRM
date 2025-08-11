@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import { BASE_URL } from "../../config";
 import { IoIosAddCircle } from "react-icons/io";
 import { LuView } from "react-icons/lu";
+import { GrFormView } from "react-icons/gr";
 import { TiEdit } from "react-icons/ti";
 import { MdDelete } from "react-icons/md";
 import { BiBuildings } from "react-icons/bi";
@@ -128,6 +129,9 @@ function LandPurchase() {
     editExpenseName: "", // Added for edit expense validation
     editExpenseAmount: "", // Added for edit expense validation
   });
+  const user = JSON.parse(localStorage.getItem("employeROyalmadeLogin"));
+ 
+  const role = user?.role;
 
   useEffect(() => {
     async function getAllLand() {
@@ -834,6 +838,7 @@ const handleRedirectToFlatlist = (projectId, newname) => {
                   <th colSpan={1}>Action</th>
                   <th colSpan={1}>Expenses</th>
                   <th colSpan={1}>Scheme</th>
+                  {role === "Admin" && <th colSpan={1}>Updated By</th>}
                 </tr>
               </thead>
               <tbody className="land_show_table_tbody">
@@ -939,7 +944,7 @@ const handleRedirectToFlatlist = (projectId, newname) => {
                             cursor: "pointer",
                           }}
                         />
-                        <LuView
+                        <GrFormView 
                           onClick={() => handleViewExpenses(land.id)}
                           style={{
                             backgroundColor: "#4b6f4cff",
@@ -968,6 +973,9 @@ const handleRedirectToFlatlist = (projectId, newname) => {
                        {land?.project?.name ? <BiBuildings /> : ""} {land?.project?.name}
                       </button>
                     </td>
+                    {role === "Admin" && (
+                      <td>{land?.updatedBy || "-"}</td> // Conditional rendering of updatedBy
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -1634,6 +1642,7 @@ const handleRedirectToFlatlist = (projectId, newname) => {
                   <th>Amount</th>
                   <th>Date</th>
                   <th>Action</th>
+                    {role === "Admin" && <th colSpan={1}>Updated By</th>}
                 </tr>
               </thead>
               <tbody className="land_show_table_tbody">
@@ -1673,6 +1682,9 @@ const handleRedirectToFlatlist = (projectId, newname) => {
                         }}
                       />
                     </td>
+                    {role === "Admin" && (
+                      <td>{expense?.updatedBy || "-"}</td> // Conditional rendering of updatedBy
+                    )}
                   </tr>
                 ))}
               </tbody>

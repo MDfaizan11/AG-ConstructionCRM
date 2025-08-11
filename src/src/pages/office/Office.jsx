@@ -7,9 +7,7 @@ import axios from "axios";
 
 function Office() {
   const printOfficeTableRefs = useRef({});
-  const token = JSON.parse(
-    localStorage.getItem("employeROyalmadeLogin")
-  )?.token;
+  const token = JSON.parse(localStorage.getItem("employeROyalmadeLogin"))?.token;
   const [officeExpenseData, setOfficeExpenseData] = useState([]);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +19,7 @@ function Office() {
     direction: "ascending",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState("cards");
+  const [viewMode, setViewMode] = useState("table");
   const expensesPerPage = 12;
   const [showAddOfficeExpense, setShowAddOfficeExpense] = useState(false);
   const [officeGiverName, setOfficeGiverName] = useState("");
@@ -31,8 +29,7 @@ function Office() {
   const [officeDate, setOfficeDate] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);
   const [editOfficeExpenseId, setEditOfficeExpenseId] = useState("");
-  const [showOfficeExpenseEditForm, setShowOfficeExpenseEditForm] =
-    useState(false);
+  const [showOfficeExpenseEditForm, setShowOfficeExpenseEditForm] = useState(false);
   const [editOfficeGiverName, setEditOfficeGiverName] = useState("");
   const [editOfficeReceiverName, setEditOfficeReceiverName] = useState("");
   const [editOfficeRemark, setEditOfficeRemark] = useState("");
@@ -42,7 +39,9 @@ function Office() {
   const [endDate, setEndDate] = useState("");
   const [totalFilteredAmount, setTotalFilteredAmount] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+ const user = JSON.parse(localStorage.getItem("employeROyalmadeLogin"));
+ 
+  const role = user?.role;
   useEffect(() => {
     async function getAllOfficeExpense() {
       try {
@@ -53,7 +52,6 @@ function Office() {
             "Content-Type": "application/json",
           },
         });
-        console.log(response.data);
         setOfficeExpenseData(response.data);
         setFilteredExpenses(response.data);
         setIsLoading(false);
@@ -66,14 +64,11 @@ function Office() {
     getAllOfficeExpense();
   }, [token, refreshKey]);
 
-  // Filter and search functionality
   useEffect(() => {
     let filtered = officeExpenseData.filter(
       (expense) =>
         expense.remark?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        expense.reciverName
-          ?.toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
+        expense.reciverName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         expense.giverName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         expense.amount?.toString().includes(searchQuery)
     );
@@ -90,9 +85,7 @@ function Office() {
     if (activeFilter !== "All Expenses") {
       const amount = Number.parseFloat(activeFilter.split(" ")[0]);
       if (activeFilter.includes("High")) {
-        filtered = filtered.filter(
-          (expense) => Number.parseFloat(expense.amount) >= 10000
-        );
+        filtered = filtered.filter((expense) => Number.parseFloat(expense.amount) >= 10000);
       } else if (activeFilter.includes("Medium")) {
         filtered = filtered.filter(
           (expense) =>
@@ -100,9 +93,7 @@ function Office() {
             Number.parseFloat(expense.amount) < 10000
         );
       } else if (activeFilter.includes("Low")) {
-        filtered = filtered.filter(
-          (expense) => Number.parseFloat(expense.amount) < 5000
-        );
+        filtered = filtered.filter((expense) => Number.parseFloat(expense.amount) < 5000);
       }
     }
 
@@ -137,17 +128,9 @@ function Office() {
       0
     );
     setTotalFilteredAmount(total);
-
     setFilteredExpenses(filtered);
     setCurrentPage(1);
-  }, [
-    searchQuery,
-    officeExpenseData,
-    activeFilter,
-    sortConfig,
-    startDate,
-    endDate,
-  ]);
+  }, [searchQuery, officeExpenseData, activeFilter, sortConfig, startDate, endDate]);
 
   const requestSort = (key) => {
     let direction = "ascending";
@@ -191,35 +174,25 @@ function Office() {
 
   const indexOfLastExpense = currentPage * expensesPerPage;
   const indexOfFirstExpense = indexOfLastExpense - expensesPerPage;
-  const currentExpenses = filteredExpenses.slice(
-    indexOfFirstExpense,
-    indexOfLastExpense
-  );
+  const currentExpenses = filteredExpenses.slice(indexOfFirstExpense, indexOfLastExpense);
   const totalPages = Math.ceil(filteredExpenses.length / expensesPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleDeleteExpense = async (id) => {
-    const deleteConfirm = window.confirm(
-      "Are you sure you want to delete this expense?"
-    );
+    const deleteConfirm = window.confirm("Are you sure you want to delete this expense?");
     if (!deleteConfirm) return;
 
     try {
-      const response = await axios.delete(
-        `${BASE_URL}/office-expenses/delete/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.delete(`${BASE_URL}/office-expenses/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       if (response.status === 200) {
         alert("Expense deleted successfully");
-        const updatedExpenses = officeExpenseData.filter(
-          (expense) => expense.id !== id
-        );
+        const updatedExpenses = officeExpenseData.filter((expense) => expense.id !== id);
         setOfficeExpenseData(updatedExpenses);
       }
     } catch (error) {
@@ -239,16 +212,12 @@ function Office() {
       remark: officeRemark,
     };
     try {
-      const response = await axios.post(
-        `${BASE_URL}/office-expenses/create`,
-        body,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/office-expenses/create`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       if (response.status === 200) {
         alert("Office Expense Add SuccessFully");
         setRefreshKey(refreshKey + 1);
@@ -261,8 +230,7 @@ function Office() {
       }
     } catch (error) {
       console.log(error);
-
-    }finally{
+    } finally {
       setIsSubmitted(false);
     }
   }
@@ -277,7 +245,6 @@ function Office() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
       setEditOfficeReceiverName(response.data?.reciverName);
       setEditOfficeAmount(response.data?.amount);
       setEditOfficeDate(response.data?.date);
@@ -353,7 +320,6 @@ function Office() {
           </div>
           <div className="office-office-header-content">
             <h1 className="office-office-title">Office Expense Management</h1>
-            
           </div>
         </div>
 
@@ -408,13 +374,18 @@ function Office() {
           <div className="office-view-controls">
             <div className="office-view-toggle">
               <button
-                className={`office-view-toggle-btn ${
-                  viewMode === "cards" ? "office-active" : ""
-                }`}
+                className={`office-view-toggle-btn ${viewMode === "cards" ? "office-active" : ""}`}
                 onClick={() => setViewMode("cards")}
               >
                 <span className="office-view-icon">🃏</span>
                 <span className="office-view-text">Cards</span>
+              </button>
+              <button
+                className={`office-view-toggle-btn ${viewMode === "table" ? "office-active" : ""}`}
+                onClick={() => setViewMode("table")}
+              >
+                <span className="office-view-icon">📋</span>
+                <span className="office-view-text">Table</span>
               </button>
             </div>
 
@@ -426,11 +397,7 @@ function Office() {
                 <span className="office-btn-icon">+</span>
                 <span>Add Expense</span>
               </button>
-
-              <button
-                className="office-show-all-btn"
-                onClick={handleShowAllData}
-              >
+              <button className="office-show-all-btn" onClick={handleShowAllData}>
                 <span className="office-btn-icon">↻</span>
                 <span>Show All Data</span>
               </button>
@@ -460,170 +427,241 @@ function Office() {
         )}
 
         {!isLoading && !error && (
-          <div className="office-stationary-card-container">
+          <div className="office-expense-container">
             {currentExpenses.length > 0 ? (
-              currentExpenses.map((expense, index) => (
-                <div key={expense.id || index}>
-                  <div className="office-stationary-card">
-                    <div className="office-stationary-card-header">
-                      <h3>
-                        <span className="office-card-icon">
-                          <NotebookPen />
-                        </span>
-                      </h3>
-                      <div className="office-stationary-price">
-                        {formatCurrency(expense.amount)}
-                      </div>
-                    </div>
-                    <div className="office-stationary-card-body">
-                      <div className="office-stationary-info">
-                        <div className="office-info-item">
-                          <span className="office-info-label">Date</span>
-                          <span className="office-info-value">
-                            {formatDate(expense.date)}
-                          </span>
+              <>
+                {viewMode === "cards" ? (
+                  <div className="office-stationary-card-container">
+                    {currentExpenses.map((expense, index) => (
+                      <div key={expense.id || index}>
+                        <div className="office-stationary-card">
+                          <div className="office-stationary-card-header">
+                            <h3>
+                              <span className="office-card-icon">
+                                <NotebookPen />
+                              </span>
+                            </h3>
+                            <div className="office-stationary-price">
+                              {formatCurrency(expense.amount)}
+                            </div>
+                          </div>
+                          <div className="office-stationary-card-body">
+                            <div className="office-stationary-info">
+                              <div className="office-info-item">
+                                <span className="office-info-label">Date</span>
+                                <span className="office-info-value">{formatDate(expense.date)}</span>
+                              </div>
+                              <div className="office-info-item">
+                                <span className="office-info-label">Description</span>
+                                <span className="office-info-value">{expense.remark}</span>
+                              </div>
+                              <div className="office-info-item">
+                                <span className="office-info-label">From</span>
+                                <span className="office-info-value">{expense.giverName}</span>
+                              </div>
+                              <div className="office-info-item">
+                                <span className="office-info-label">To</span>
+                                <span className="office-info-value">{expense.reciverName}</span>
+                              </div>
+                              <div className="office-info-item">
+                              {role === "Admin" && <th style={{ border: "1px solid black", padding: "8px" }}>Updated By</th>}
+                               {role === "Admin" && <span className="office-info-value">{expense.updatedBy}</span>}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="office-stationary-card-actions">
+                            <button
+                              className="office-action-btn office-edit-btn"
+                              onClick={() => handleEditOfficeExpense(expense.id)}
+                            >
+                              <span>Edit</span>
+                            </button>
+                            <button
+                              className="office-action-btn office-delete-btn"
+                              onClick={() => handleDeleteExpense(expense.id)}
+                            >
+                              <span>Delete</span>
+                            </button>
+                            <button
+                              className="office-action-btn office-print-btn"
+                              onClick={() => handlePrintOfficeExpense(expense.id)}
+                            >
+                              <span>Print</span>
+                            </button>
+                          </div>
                         </div>
-                        <div className="office-info-item">
-                          <span className="office-info-label">Description</span>
-                          <span className="office-info-value">
-                            {expense.remark}
-                          </span>
-                        </div>
-                        <div className="office-info-item">
-                          <span className="office-info-label">From</span>
-                          <span className="office-info-value">
-                            {expense.giverName}
-                          </span>
-                        </div>
-                        <div className="office-info-item">
-                          <span className="office-info-label">To</span>
-                          <span className="office-info-value">
-                            {expense.reciverName}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="office-stationary-card-actions">
-                      <button
-                        className="office-action-btn office-edit-btn"
-                        onClick={() => handleEditOfficeExpense(expense.id)}
-                      >
-                        <span>Edit</span>
-                      </button>
-                      <button
-                        className="office-action-btn office-delete-btn"
-                        onClick={() => handleDeleteExpense(expense.id)}
-                      >
-                        <span>Delete</span>
-                      </button>
-                      <button
-                        className="office-action-btn office-print-btn"
-                        onClick={() => handlePrintOfficeExpense(expense.id)}
-                      >
-                        <span>Print</span>
-                      </button>
-                    </div>
-                  </div>
+                        <div style={{ display: "none" }}>
+                          <table
+                            ref={(el) => (printOfficeTableRefs.current[expense.id] = el)}
+                            style={{ borderCollapse: "collapse", width: "100%" }}
+                          >
+                            <thead>
+                              <tr>
+                                <th style={{ border: "1px solid black", padding: "8px" }}>Date</th>
+                                <th style={{ border: "1px solid black", padding: "8px" }}>Description</th>
+                                <th style={{ border: "1px solid black", padding: "8px" }}>From</th>
+                                <th style={{ border: "1px solid black", padding: "8px" }}>To</th>
+                                <th style={{ border: "1px solid black", padding: "8px" }}>Amount</th>
+                                {role === "Admin" && <th style={{ border: "1px solid black", padding: "8px" }}>Updated By</th>}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style={{ border: "1px solid black", padding: "8px" }}>
+                                  {formatDate(expense.date)}
+                                </td>
+                                <td style={{ border: "1px solid black", padding: "8px" }}>{expense.remark}</td>
+                                <td style={{ border: "1px solid black", padding: "8px" }}>{expense.giverName}</td>
+                                <td style={{ border: "1px solid black", padding: "8px" }}>{expense.reciverName}</td>
+                                <td style={{ border: "1px solid black", padding: "8px" }}>
+                                  {formatCurrency(expense.amount)}
+                                </td>
+                               {role === "Admin" && <td style={{ border: "1px solid black", padding: "8px" }}>{expense.updatedBy}</td>}
 
-                  <div style={{ display: "none" }}>
-                    <table
-                      ref={(el) =>
-                        (printOfficeTableRefs.current[expense.id] = el)
-                      }
-                      style={{ borderCollapse: "collapse", width: "100%" }}
-                    >
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="office-expense-table-container">
+                    <table className="office-expense-table">
                       <thead>
                         <tr>
-                          <th
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
+                          <th onClick={() => requestSort("date")} aria-sort={sortConfig.key === "date" ? sortConfig.direction : "none"}>
                             Date
+                            {sortConfig.key === "date" && (
+                              <span className="office-sort-icon">
+                                {sortConfig.direction === "ascending" ? " ↑" : " ↓"}
+                              </span>
+                            )}
                           </th>
-                          <th
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
+                          <th onClick={() => requestSort("remark")} aria-sort={sortConfig.key === "remark" ? sortConfig.direction : "none"}>
                             Description
+                            {sortConfig.key === "remark" && (
+                              <span className="office-sort-icon">
+                                {sortConfig.direction === "ascending" ? " ↑" : " ↓"}
+                              </span>
+                            )}
                           </th>
-                          <th
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
+                          <th onClick={() => requestSort("giverName")} aria-sort={sortConfig.key === "giverName" ? sortConfig.direction : "none"}>
                             From
+                            {sortConfig.key === "giverName" && (
+                              <span className="office-sort-icon">
+                                {sortConfig.direction === "ascending" ? " ↑" : " ↓"}
+                              </span>
+                            )}
                           </th>
-                          <th
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
+                          <th onClick={() => requestSort("reciverName")} aria-sort={sortConfig.key === "reciverName" ? sortConfig.direction : "none"}>
                             To
+                            {sortConfig.key === "reciverName" && (
+                              <span className="office-sort-icon">
+                                {sortConfig.direction === "ascending" ? " ↑" : " ↓"}
+                              </span>
+                            )}
                           </th>
-                          <th
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
+                          <th onClick={() => requestSort("amount")} aria-sort={sortConfig.key === "amount" ? sortConfig.direction : "none"}>
                             Amount
+                            {sortConfig.key === "amount" && (
+                              <span className="office-sort-icon">
+                                {sortConfig.direction === "ascending" ? " ↑" : " ↓"}
+                              </span>
+                            )}
                           </th>
+                          <th>Actions</th>
+                          {role === "Admin" && <th>Updated By</th>}
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
-                            {formatDate(expense.date)}
-                          </td>
-                          <td
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
-                            {expense.remark}
-                          </td>
-                          <td
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
-                            {expense.giverName}
-                          </td>
-                          <td
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
-                            {expense.reciverName}
-                          </td>
-                          <td
-                            style={{
-                              border: "1px solid black",
-                              padding: "8px",
-                            }}
-                          >
-                            {formatCurrency(expense.amount)}
-                          </td>
-                        </tr>
+                        {currentExpenses.map((expense, index) => (
+                          <tr key={expense.id || index}>
+                            <td>{formatDate(expense.date)}</td>
+                            <td>{expense.remark}</td>
+                            <td>{expense.giverName}</td>
+                            <td>{expense.reciverName}</td>
+                            <td className="office-amount-cell">{formatCurrency(expense.amount)}</td>
+                            
+
+                            <td className="office-action-cell">
+                              <button
+                                className="office-action-btn office-edit-btn"
+                                onClick={() => handleEditOfficeExpense(expense.id)}
+                                aria-label={`Edit expense ${expense.id}`}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="office-action-btn office-delete-btn"
+                                onClick={() => handleDeleteExpense(expense.id)}
+                                aria-label={`Delete expense ${expense.id}`}
+                              >
+                                Delete
+                              </button>
+                              <button
+                                className="office-action-btn office-print-btn"
+                                onClick={() => handlePrintOfficeExpense(expense.id)}
+                                aria-label={`Print expense ${expense.id}`}
+                              >
+                                Print
+                              </button>
+                            </td>
+                           {role === "Admin" && <td>{expense.updatedBy}</td>}
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
+                    {currentExpenses.map((expense) => (
+                      <div key={expense.id} style={{ display: "none" }}>
+                        <table
+                          ref={(el) => (printOfficeTableRefs.current[expense.id] = el)}
+                          style={{ borderCollapse: "collapse", width: "100%" }}
+                        >
+                          <thead>
+                            <tr>
+                              <th style={{ border: "1px solid black", padding: "8px" }}>Date</th>
+                              <th style={{ border: "1px solid black", padding: "8px" }}>Description</th>
+                              <th style={{ border: "1px solid black", padding: "8px" }}>From</th>
+                              <th style={{ border: "1px solid black", padding: "8px" }}>To</th>
+                              <th style={{ border: "1px solid black", padding: "8px" }}>Amount</th>
+                              {role === "Admin" && <th style={{ border: "1px solid black", padding: "8px" }}>Updated By</th>}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td style={{ border: "1px solid black", padding: "8px" }}>
+                                {formatDate(expense.date)}
+                              </td>
+                              <td style={{ border: "1px solid black", padding: "8px" }}>{expense.remark}</td>
+                              <td style={{ border: "1px solid black", padding: "8px" }}>{expense.giverName}</td>
+                              <td style={{ border: "1px solid black", padding: "8px" }}>{expense.reciverName}</td>
+                              <td style={{ border: "1px solid black", padding: "8px" }}>
+                                {formatCurrency(expense.amount)}
+                              </td>
+                              {role === "Admin" && <td style={{ border: "1px solid black", padding: "8px" }}>{expense.updatedBy}</td>}
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    ))}
+                    <div className="office-pagination-container">
+                      <div className="office-pagination">
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                          <button
+                            key={page}
+                            onClick={() => paginate(page)}
+                            className={`office-pagination-btn ${currentPage === page ? "office-active" : ""}`}
+                            aria-label={`Go to page ${page}`}
+                          >
+                            {page}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))
+                )}
+              </>
             ) : (
               <div className="office-office-no-data">
                 <div className="office-no-data-content">
@@ -634,7 +672,10 @@ function Office() {
                       ? "Try adjusting your search criteria, date range, or filters"
                       : "No office expenses have been recorded yet"}
                   </p>
-                  <button className="office-add-expense-btn-small">
+                  <button
+                    className="office-add-expense-btn-small"
+                    onClick={() => setShowAddOfficeExpense(true)}
+                  >
                     <span className="office-btn-icon">+</span>
                     <span>Add First Expense</span>
                   </button>
@@ -651,17 +692,12 @@ function Office() {
             <button
               onClick={() => setShowAddOfficeExpense(false)}
               className="office-addofficeExpenseform-close-button"
+              aria-label="Close add expense form"
             >
               ✕
             </button>
-            <h2 className="office-addofficeExpenseform-title">
-              Add Office Expense
-            </h2>
-
-            <form
-              className="office-addofficeExpenseform-form"
-              onSubmit={handleAddOfficeExpense}
-            >
+            <h2 className="office-addofficeExpenseform-title">Add Office Expense</h2>
+            <form className="office-addofficeExpenseform-form" onSubmit={handleAddOfficeExpense}>
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="text"
@@ -670,9 +706,9 @@ function Office() {
                   value={officeGiverName}
                   onChange={(e) => setOfficeGiverName(e.target.value)}
                   required
+                  aria-label="Giver Name"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="text"
@@ -681,9 +717,9 @@ function Office() {
                   value={officeReceiverName}
                   onChange={(e) => setOfficeReceiverName(e.target.value)}
                   required
+                  aria-label="Receiver Name"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="text"
@@ -692,9 +728,9 @@ function Office() {
                   value={officeRemark}
                   onChange={(e) => setOfficeRemark(e.target.value)}
                   required
+                  aria-label="Remark"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="number"
@@ -703,9 +739,9 @@ function Office() {
                   value={officeAmount}
                   onChange={(e) => setOfficeAmount(e.target.value)}
                   required
+                  aria-label="Amount"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="date"
@@ -713,12 +749,13 @@ function Office() {
                   value={officeDate}
                   onChange={(e) => setOfficeDate(e.target.value)}
                   required
+                  aria-label="Date"
                 />
               </div>
-
               <button
                 type="submit"
                 className="office-addofficeExpenseform-submit-button"
+                disabled={isSubmitted}
               >
                 {isSubmitted ? "Submitting..." : "Submit"}
               </button>
@@ -733,17 +770,12 @@ function Office() {
             <button
               onClick={() => setShowOfficeExpenseEditForm(false)}
               className="office-addofficeExpenseform-close-button"
+              aria-label="Close edit expense form"
             >
               ✕
             </button>
-            <h2 className="office-addofficeExpenseform-title">
-              Edit Office Expense
-            </h2>
-
-            <form
-              className="office-addofficeExpenseform-form"
-              onSubmit={handleUpdateOfficeExpense}
-            >
+            <h2 className="office-addofficeExpenseform-title">Edit Office Expense</h2>
+            <form className="office-addofficeExpenseform-form" onSubmit={handleUpdateOfficeExpense}>
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="text"
@@ -751,9 +783,9 @@ function Office() {
                   className="office-addofficeExpenseform-input"
                   value={editOfficeGiverName}
                   onChange={(e) => setEditOfficeGiverName(e.target.value)}
+                  aria-label="Giver Name"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="text"
@@ -761,9 +793,9 @@ function Office() {
                   className="office-addofficeExpenseform-input"
                   value={editOfficeReceiverName}
                   onChange={(e) => setEditOfficeReceiverName(e.target.value)}
+                  aria-label="Receiver Name"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="text"
@@ -771,9 +803,9 @@ function Office() {
                   className="office-addofficeExpenseform-input"
                   value={editOfficeRemark}
                   onChange={(e) => setEditOfficeRemark(e.target.value)}
+                  aria-label="Remark"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="number"
@@ -781,22 +813,19 @@ function Office() {
                   className="office-addofficeExpenseform-input"
                   value={editOfficeAmount}
                   onChange={(e) => setEditOfficeAmount(e.target.value)}
+                  aria-label="Amount"
                 />
               </div>
-
               <div className="office-addofficeExpenseform-field">
                 <input
                   type="date"
                   className="office-addofficeExpenseform-input"
                   value={editOfficeDate}
                   onChange={(e) => setEditOfficeDate(e.target.value)}
+                  aria-label="Date"
                 />
               </div>
-
-              <button
-                type="submit"
-                className="office-addofficeExpenseform-submit-button"
-              >
+              <button type="submit" className="office-addofficeExpenseform-submit-button">
                 Update
               </button>
             </form>

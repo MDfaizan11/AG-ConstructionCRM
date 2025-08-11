@@ -7,6 +7,9 @@ function Addmeterial() {
   const token = JSON.parse(
     localStorage.getItem("employeROyalmadeLogin")
   )?.token;
+   const user = JSON.parse(localStorage.getItem("employeROyalmadeLogin"));
+ 
+  const role = user?.role;
   const navigate = useNavigate();
   const [StockData, setStockData] = useState([]);
   const [StockName, setStockName] = useState("");
@@ -238,6 +241,7 @@ function Addmeterial() {
                 <th> Remaining Quantity</th>
                 <th> Action</th>
                 <th> Action</th>
+                {role === "Admin" && <th> Updated By</th>}
               </tr>
             </thead>
             <tbody>
@@ -272,6 +276,7 @@ function Addmeterial() {
                       Delete Stock
                     </button>
                   </td>
+                  <td>{role === "Admin" && <td>{item.updatedBy}</td>}</td>
                 </tr>
               ))}
             </tbody>

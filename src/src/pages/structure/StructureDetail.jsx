@@ -25,7 +25,9 @@ function StructureDetail() {
   const [Editamount, setEditAmount] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+ const user = JSON.parse(localStorage.getItem("employeROyalmadeLogin"));
+ 
+  const role = user?.role;
   useEffect(() => {
     async function getStructurePayment() {
       try {
@@ -202,6 +204,7 @@ function StructureDetail() {
                 <th>Project</th>
                 <th>Remark</th>
                 <th> Action</th>
+                {role === "Admin" && <th colSpan={1}>Updated By</th>}
               </tr>
             </thead>
             <tbody>
@@ -234,6 +237,9 @@ function StructureDetail() {
                         </button>
                       </div>
                     </td>
+                    {role === "Admin" && (
+                      <td>{item.updatedBy || "-"}</td> // Conditional rendering of updatedBy
+                    )}
                   </tr>
                 ))
               )}

@@ -134,6 +134,7 @@ const Login = () => {
       const role =
         response.data.employee?.role?.[0]?.roleName ||
         response.data.admin?.role?.[0]?.roleName ||
+        response.data.subAdmin?.role?.[0]?.roleName ||
         response.data.superisor?.role?.[0]?.roleName;
       const token = response.data.jwtToken;
 

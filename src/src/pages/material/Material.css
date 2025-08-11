@@ -64,19 +64,18 @@
 }
 
 .material_card_view_container button {
-  background-color: rgb(224 44 44);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s ease-in-out;
-  width: 100%;
+    background-color: rgb(224 95 44);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
 }
-
 .material_card_view_container button:hover {
-  background-color: rgb(5, 130, 153);
+  background-color: rgb(153, 54, 5);
 }
 
 .Add_stock-popup-overlay {

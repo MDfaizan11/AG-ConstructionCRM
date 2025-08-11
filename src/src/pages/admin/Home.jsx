@@ -94,8 +94,18 @@ function Home() {
       bgColor: "#fef2f2",
     },
   ];
+  const employeeModules = [
+    {
+      title: "Lead Management",
+      description: "Manage and track all leads",
+      icon: MdOutlineBarChart,
+      route: "/lead",
+      color: "#3b82f6",
+      bgColor: "#eff6ff",
+    },
+  ];
 
-  const currentModules = role === "Admin" ? adminModules : supervisorModules;
+  const currentModules = role === "Admin" || role === "SubAdmin" ? adminModules : role === "Employee" ? employeeModules : supervisorModules;
 
   return (
     <div className="home-container">

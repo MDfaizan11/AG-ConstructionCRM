@@ -52,7 +52,9 @@ function Flatowner() {
   const token = JSON.parse(
     localStorage.getItem("employeROyalmadeLogin")
   )?.token;
-
+ const user = JSON.parse(localStorage.getItem("employeROyalmadeLogin"));
+ 
+  const role = user?.role;
   // State management
   const [customerDetail, setCustomerDetail] = useState(null);
   const [bankName, setbankName] = useState("");
@@ -509,7 +511,8 @@ function Flatowner() {
               <p>{customerDetail.customer?.phoneNumber || "N/A"}</p>
             </div>
           </div>
-
+              <div > {role === "Admin" && <span >This Flat Detail Updated By</span>} {role === "Admin" && (<span style={{color:"red"}}>{customerDetail?.updatedBy || "-"}</span> // Conditional rendering of updatedBy
+                    )}</div>
           <div className="flatowner-details-grid">
             {/* Customer Information */}
             <div className="flatowner-info-section">
@@ -969,6 +972,8 @@ function Flatowner() {
                       <th>Method</th>
                       <th>Note</th>
                       <th className="flatowner-action-column">Actions</th>
+                      {role === "Admin" && <th colSpan={1}>Updated By</th>}
+
                     </tr>
                   </thead>
                   <tbody>
@@ -1000,6 +1005,9 @@ function Flatowner() {
                             <BsTrash />
                           </button>
                         </td>
+                        {role === "Admin" && (
+                      <td>{item.updatedBy || "-"}</td> // Conditional rendering of updatedBy
+                    )}
                       </tr>
                     ))}
                   </tbody>
@@ -1328,497 +1336,458 @@ function Flatowner() {
 
       {/* Customer Slip Modal */}
       {customerSlip && customerDetail && (
-        <div className="flatowner-modal-overlay">
-          <div className="flatowner-modal flatowner-modal-large">
-            <div className="flatowner-modal-header">
-              <h3>Customer Slip</h3>
-              <div className="flatowner-header-actions">
-                <button
-                  className="flatowner-btn flatowner-btn-success"
-                  onClick={handleDownload}
-                >
-                  <BsDownload />
-                  Download PDF
-                </button>
-                <button
-                  className="flatowner-close-btn"
-                  onClick={() => setcustomerSlip(false)}
-                >
-                  <MdClose />
-                </button>
+  <div className="flatowner-modal-overlay">
+    <div className="flatowner-modal flatowner-modal-large">
+      <div className="flatowner-modal-header">
+        <h3>Customer Slip</h3>
+        <div className="flatowner-header-actions">
+          <button
+            className="flatowner-btn flatowner-btn-success"
+            onClick={handleDownload}
+          >
+            <BsDownload />
+            Download PDF
+          </button>
+          <button
+            className="flatowner-close-btn"
+            onClick={() => setcustomerSlip(false)}
+          >
+            <MdClose />
+          </button>
+        </div>
+      </div>
+
+      <div className="flatowner-slip-content" ref={letterref}>
+        <div className="relieving_header_section">
+          <div className="relieving_company_logo_container">
+            <img
+              className="relieving_company_logo"
+              src={AGImg}
+              alt="logo"
+            />
+          </div>
+          <div className="relieving_company_details">
+            <h3>Address</h3>
+            <div className="relieving_detail_row">
+              <div className="relieving_detail_text">
+                <p>
+                  Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole Nagar
+                </p>
+                <p>Hudkeshwar Road, Nagpur - 440034</p>
               </div>
             </div>
-
-            <div className="flatowner-slip-content" ref={letterref}>
-              <div className="relieving_header_section">
-                <div className="relieving_company_logo_container">
-                  <img
-                    className="relieving_company_logo"
-                    src={AGImg}
-                    alt="logo"
-                  />
-                </div>
-                <div className="relieving_company_details">
-                  <h3>Address</h3>
-                  <div className="relieving_detail_row">
-                    <div className="relieving_detail_text">
-                      <p>
-                        Plot 62, Hudkeshwar Rd, near Rakshak Fresh Mart, Ingole
-                        Nagar
-                      </p>
-                      <p>Hudkeshwar Road, Nagpur - 440034</p>
-                    </div>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <div className="relieving_icon_box">
-                      <FaEnvelope size={20} color="#000" />
-                    </div>
-                    <p className="relieving_detail_text">
-                      agconstructions220@gmail.com
-                    </p>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <div className="relieving_icon_box">
-                      <FaGlobe size={20} color="#000" />
-                    </div>
-                    <p className="relieving_detail_text">
-                      www.agconstructionnagpur.in
-                    </p>
-                  </div>
-                  <div className="relieving_detail_row">
-                    <div className="relieving_icon_box">
-                      <FaPhoneAlt size={20} color="#000" />
-                    </div>
-
-                    <p className="relieving_detail_text">+91 7620 419 075</p>
-                  </div>
-                </div>
+            <div className="relieving_detail_row">
+              <div className="relieving_icon_box">
+                <FaEnvelope size={20} color="#000" />
               </div>
-
-              <hr className="relieving_line_thick" />
-              <p
-                style={{
-                  marginTop: "10px",
-                  marginLeft: "25px",
-                  fontSize: "12px",
-                }}
-              >
-                Date: {new Date().toLocaleDateString("en-GB")}
+              <p className="relieving_detail_text">
+                agconstructions220@gmail.com
               </p>
-
-              <div
-                className="payment_slip_first_table_wrapper"
-                style={{ marginLeft: "25px", marginTop: "10px" }}
-              >
-                <table
-                  style={{
-                    border: "1px solid gray",
-                    borderCollapse: "collapse",
-                    width: "400px",
-                  }}
-                  className="payment_slip_first_table"
-                >
-                  <tr>
-                    <td style={{ border: "1px solid gray" }}>
-                      <b style={{ fontSize: "12px", padding: "2px 10px" }}>
-                        Flat No / Plot No{" "}
-                      </b>
-                    </td>
-                    <td style={{ border: "1px solid gray" }}>
-                      <b style={{ fontSize: "12px", padding: "2px 10px" }}>
-                        {" "}
-                        {customerDetail.residency.identifier}
-                      </b>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ border: "1px solid gray" }}>
-                      <b style={{ fontSize: "12px", padding: "2px 10px" }}>
-                        {" "}
-                        Area
-                      </b>
-                    </td>
-                    <td style={{ border: "1px solid gray" }}>
-                      <b style={{ fontSize: "12px", padding: "2px 10px" }}>
-                        {" "}
-                        {customerDetail.customer.address}
-                      </b>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ border: "1px solid gray" }}>
-                      <b style={{ fontSize: "12px", padding: "2px 10px" }}>
-                        Location
-                      </b>
-                    </td>
-                    <td style={{ border: "1px solid gray" }}>
-                      <b style={{ fontSize: "12px", padding: "2px 10px" }}>
-                        {customerDetail.residency.name}
-                      </b>
-                    </td>
-                  </tr>
-                </table>
+            </div>
+            <div className="relieving_detail_row">
+              <div className="relieving_icon_box">
+                <FaGlobe size={20} color="#000" />
               </div>
-              <p
-                style={{
-                  marginLeft: "25px",
-                  marginTop: "25px",
-                  textAlign: "center",
-                  fontSize: "15px",
-                }}
-              >
-                RECEIVED with thanks from <b>{customerDetail.customer.name} </b>
-                the sum of Rupees{" "}
-                <b> {customerDetail.dealPrice.toLocaleString()} </b> by Cheque /
-                Cash / Draft No. <b>{customerDetail.residency.identifier}</b>{" "}
-                flat / plot address <b> {customerDetail.customer.address} </b>{" "}
-                in part / full / advance payment.
+              <p className="relieving_detail_text">
+                www.agconstructionnagpur.in
               </p>
-
-              <div
-                className="payment_slip_container"
-                style={{
-                  border: "2px solid black",
-                  width: "150px",
-                  borderRadius: "50px",
-                  marginLeft: "25px",
-                  marginTop: "15px",
-                }}
-              >
-                <p style={{ fontSize: "15px", marginLeft: "5px" }}>
-                  ₹ : <b> {customerDetail.dealPrice.toLocaleString()}</b>
-                </p>
+            </div>
+            <div className="relieving_detail_row">
+              <div className="relieving_icon_box">
+                <FaPhoneAlt size={20} color="#000" />
               </div>
-              <p
-                style={{
-                  marginLeft: "25px",
-                  marginTop: "5px",
-                  fontSize: "15px",
-                }}
-              >
-                <b>
-                  {" "}
-                  Balance Amount :{" "}
-                  {(
-                    customerDetail.dealPrice -
-                    (customerDetail.agreementAmount +
-                      customerDetail.tokenAmount)
-                  ).toLocaleString()}
-                </b>
-              </p>
-              <p
-                style={{
-                  marginLeft: "25px",
-                  marginTop: "5px",
-                  fontSize: "15px",
-                }}
-              >
-                <b>
-                  Total Payable:{" "}
-                  {(
-                    customerDetail.agreementAmount + customerDetail.tokenAmount
-                  ).toLocaleString()}
-                </b>
-              </p>
-
-              <div
-                className="payment_slip_signature_wrapper"
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "30px",
-                }}
-              >
-                <b style={{ marginLeft: "25px", fontSize: "15px" }}>
-                  Customer Signature
-                </b>
-                <b style={{ marginRight: "30px", fontSize: "15px" }}>
-                  Authorised Signature
-                </b>
-              </div>
-
-              <hr style={{ border: "2px solid green" }} />
-
-              <div
-                className="payment_slip_secound_slip"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  marginLeft: "25px",
-                }}
-              >
-                <table
-                  style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    margin: "20px 0",
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: "13px",
-                  }}
-                >
-                  <tr>
-                    <th
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        backgroundColor: "#f2f2f2",
-                        color: "black",
-                      }}
-                    >
-                      S.No.
-                    </th>
-                    <th
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        backgroundColor: "#f2f2f2",
-                        color: "black",
-                      }}
-                    >
-                      Other Charges
-                    </th>
-                    <th
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        backgroundColor: "#f2f2f2",
-                        color: "black",
-                      }}
-                    >
-                      Percentage
-                    </th>
-                    <th
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        backgroundColor: "#f2f2f2",
-                        color: "black",
-                      }}
-                    >
-                      Amount
-                    </th>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      1
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      Total Price
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      -
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {customerDetail.dealPrice.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      2
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      Stamp Duty
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {customerDetail.stampDutyAmount.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      3
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      Registration
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {customerDetail.registrationAmount.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      4
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      GST
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {customerDetail.gstAmount.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      5
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      Electric Meter and Water Charges
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {customerDetail.electricWaterAmmount.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      6
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      Legal Charges / Documentation Charges
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {customerDetail.legalChargesAmmout.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      7
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      Maintenance Charges for 5 Years
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                  </tr>
-                  <tr>
-                    <td
-                      colSpan="2"
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Total of Overhead Charges:
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                  </tr>
-                  <tr>
-                    <td
-                      colSpan="2"
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Basic Cost of Flat:
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {customerDetail.dealPrice.toLocaleString()}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      colSpan="2"
-                      style={{
-                        border: "1px solid #000",
-                        padding: "2px 10px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Grand Total:
-                    </td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    ></td>
-                    <td
-                      style={{ border: "1px solid #000", padding: "2px 10px" }}
-                    >
-                      {" "}
-                      {(
-                        customerDetail.dealPrice +
-                        customerDetail.stampDutyAmount +
-                        customerDetail.registrationAmount +
-                        customerDetail.gstAmount +
-                        customerDetail.electricWaterAmmount +
-                        customerDetail.legalChargesAmmout
-                      ).toLocaleString()}
-                    </td>
-                  </tr>
-                </table>
-              </div>
+              <p className="relieving_detail_text">+91 7620 419 075</p>
             </div>
           </div>
         </div>
-      )}
+
+        <hr className="relieving_line_thick" />
+        <p
+          style={{
+            marginTop: "10px",
+            marginLeft: "25px",
+            fontSize: "12px",
+          }}
+        >
+          Date: {new Date().toLocaleDateString("en-GB")}
+        </p>
+
+        <div
+          className="payment_slip_first_table_wrapper"
+          style={{ marginLeft: "25px", marginTop: "10px" }}
+        >
+          <table
+            style={{
+              border: "1px solid gray",
+              borderCollapse: "collapse",
+              width: "400px",
+            }}
+            className="payment_slip_first_table"
+          >
+            <tr>
+              <td style={{ border: "1px solid gray" }}>
+                <b style={{ fontSize: "12px", padding: "2px 10px" }}>
+                  Flat No / Plot No{" "}
+                </b>
+              </td>
+              <td style={{ border: "1px solid gray" }}>
+                <b style={{ fontSize: "12px", padding: "2px 10px" }}>
+                  {customerDetail.residency?.identifier || "N/A"}
+                </b>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid gray" }}>
+                <b style={{ fontSize: "12px", padding: "2px 10px" }}>
+                  Area
+                </b>
+              </td>
+              <td style={{ border: "1px solid gray" }}>
+                <b style={{ fontSize: "12px", padding: "2px 10px" }}>
+                  {customerDetail.customer?.address || "N/A"}
+                </b>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid gray" }}>
+                <b style={{ fontSize: "12px", padding: "2px 10px" }}>
+                  Location
+                </b>
+              </td>
+              <td style={{ border: "1px solid gray" }}>
+                <b style={{ fontSize: "12px", padding: "2px 10px" }}>
+                  {customerDetail.residency?.name || "N/A"}
+                </b>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p
+          style={{
+            marginLeft: "25px",
+            marginTop: "25px",
+            textAlign: "center",
+            fontSize: "15px",
+          }}
+        >
+          RECEIVED with thanks from{" "}
+          <b>{customerDetail.customer?.name || "N/A"} </b>
+          the sum of Rupees{" "}
+          <b>{customerDetail.dealPrice?.toLocaleString() || "N/A"} </b>
+          by Cheque / Cash / Draft No.{" "}
+          <b>{customerDetail.residency?.identifier || "N/A"}</b> flat / plot
+          address <b>{customerDetail.customer?.address || "N/A"} </b> in part
+          / full / advance payment.
+        </p>
+
+        <div
+          className="payment_slip_container"
+          style={{
+            border: "2px solid black",
+            width: "150px",
+            borderRadius: "50px",
+            marginLeft: "25px",
+            marginTop: "15px",
+          }}
+        >
+          <p style={{ fontSize: "15px", marginLeft: "5px" }}>
+            ₹ : <b>{customerDetail.dealPrice?.toLocaleString() || "N/A"}</b>
+          </p>
+        </div>
+        <p
+          style={{
+            marginLeft: "25px",
+            marginTop: "5px",
+            fontSize: "15px",
+          }}
+        >
+          <b>
+            Balance Amount :{" "}
+            {customerDetail.dealPrice &&
+            customerDetail.agreementAmount &&
+            customerDetail.tokenAmount
+              ? (
+                  customerDetail.dealPrice -
+                  (customerDetail.agreementAmount +
+                    customerDetail.tokenAmount)
+                ).toLocaleString()
+              : "N/A"}
+          </b>
+        </p>
+        <p
+          style={{
+            marginLeft: "25px",
+            marginTop: "5px",
+            fontSize: "15px",
+          }}
+        >
+          <b>
+            Total Payable:{" "}
+            {customerDetail.agreementAmount && customerDetail.tokenAmount
+              ? (
+                  customerDetail.agreementAmount + customerDetail.tokenAmount
+                ).toLocaleString()
+              : "N/A"}
+          </b>
+        </p>
+
+        <div
+          className="payment_slip_signature_wrapper"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "30px",
+          }}
+        >
+          <b style={{ marginLeft: "25px", fontSize: "15px" }}>
+            Customer Signature
+          </b>
+          <b style={{ marginRight: "30px", fontSize: "15px" }}>
+            Authorised Signature
+          </b>
+        </div>
+
+        <hr style={{ border: "2px solid green" }} />
+
+        <div
+          className="payment_slip_secound_slip"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+            marginLeft: "25px",
+          }}
+        >
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              margin: "20px 0",
+              fontFamily: "Arial, sans-serif",
+              fontSize: "13px",
+            }}
+          >
+          <thead>
+            <tr>
+              <th
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  backgroundColor: "#f2f2f2",
+                  color: "black",
+                }}
+              >
+                S.No.
+              </th>
+              <th
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  backgroundColor: "#f2f2f2",
+                  color: "black",
+                }}
+              >
+                Other Charges
+              </th>
+              <th
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  backgroundColor: "#f2f2f2",
+                  color: "black",
+                }}
+              >
+                Percentage
+              </th>
+              <th
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  backgroundColor: "#f2f2f2",
+                  color: "black",
+                }}
+              >
+                Amount
+              </th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                1
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                Total Price
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.dealPrice?.toLocaleString() || "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                2
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                Stamp Duty
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.stampDutyAmount?.toLocaleString() || "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                3
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                Registration
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.registrationAmount?.toLocaleString() || "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                4
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                GST
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.gstAmount?.toLocaleString() || "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                5
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                Electric Meter and Water Charges
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.electricWaterAmmount?.toLocaleString() ||
+                  "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                6
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                Legal Charges / Documentation Charges
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.legalChargesAmmout?.toLocaleString() || "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                7
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                Maintenance Charges for 5 Years
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+            </tr>
+            <tr>
+              <td
+                colSpan="2"
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  fontWeight: "bold",
+                }}
+              >
+                Total of Overhead Charges:
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+            </tr>
+            <tr>
+              <td
+                colSpan="2"
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  fontWeight: "bold",
+                }}
+              >
+                Basic Cost of Flat:
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.dealPrice?.toLocaleString() || "N/A"}
+              </td>
+            </tr>
+            <tr>
+              <td
+                colSpan="2"
+                style={{
+                  border: "1px solid #000",
+                  padding: "2px 10px",
+                  fontWeight: "bold",
+                }}
+              >
+                Grand Total:
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                -
+              </td>
+              <td style={{ border: "1px solid #000", padding: "2px 10px" }}>
+                {customerDetail.dealPrice &&
+                customerDetail.stampDutyAmount &&
+                customerDetail.registrationAmount &&
+                customerDetail.gstAmount &&
+                customerDetail.electricWaterAmmount &&
+                customerDetail.legalChargesAmmout
+                  ? (
+                      customerDetail.dealPrice +
+                      customerDetail.stampDutyAmount +
+                      customerDetail.registrationAmount +
+                      customerDetail.gstAmount +
+                      customerDetail.electricWaterAmmount +
+                      customerDetail.legalChargesAmmout
+                    ).toLocaleString()
+                  : "N/A"}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }
